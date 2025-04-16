@@ -1,3 +1,3 @@
-build/default/debug/Main.o: Main.c iLedLib.h
+build/default/debug/Main.o: Main.c iLEDasm.h
 
-iLedLib.h:
+iLEDasm.h:

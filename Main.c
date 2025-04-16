@@ -1,6 +1,8 @@
-#include "iLedLib.h"
+#include "iLEDasm.h"
 #include "stdlib.h" // for psuedo random num generation
-
+//#include "iLEDwriteColor.h"
+#include "stdlib.h"
+#include "xc.h"
 #pragma config ICS = PGx1          // Comm Channel Select (Emulator EMUC1/EMUD1 pins are shared with PGC1/PGD1)
 #pragma config FWDTEN = OFF        // Watchdog Timer Enable (Watchdog Timer is disabled)
 #pragma config GWRP = OFF          // General Code Segment Write Protect (Writes to program memory are allowed)
@@ -22,11 +24,23 @@ int main (void){
      * output from RA0
      */
     int randomTimeNum;
+    int randomColor;
     while(1){
       
         randomTimeNum = 2 + rand() % (8-2 + 1);
-        delay(randomTimeNum);
-        
+        delay(randomTimeNum*100);
+        randomColor = 1 + rand() % (3-1+1);
+        switch(randomColor){
+            case 1:
+                writeColor(255,0,0);
+                break;
+            case 2:
+                writeColor(0,255,0);
+                break;
+            case 3:
+                writeColor(0,0,255);
+                break;
+            }
     }
     
     return 0;

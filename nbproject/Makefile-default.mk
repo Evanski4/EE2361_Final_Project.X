@@ -51,17 +51,17 @@ OBJECTDIR=build/${CND_CONF}/${IMAGE_TYPE}
 DISTDIR=dist/${CND_CONF}/${IMAGE_TYPE}
 
 # Source Files Quoted if spaced
-SOURCEFILES_QUOTED_IF_SPACED=iLed.c asmDelay.s Main.c
+SOURCEFILES_QUOTED_IF_SPACED=Main.c iLEDasm.s iLEDwriteColor.c
 
 # Object Files Quoted if spaced
-OBJECTFILES_QUOTED_IF_SPACED=${OBJECTDIR}/iLed.o ${OBJECTDIR}/asmDelay.o ${OBJECTDIR}/Main.o
-POSSIBLE_DEPFILES=${OBJECTDIR}/iLed.o.d ${OBJECTDIR}/asmDelay.o.d ${OBJECTDIR}/Main.o.d
+OBJECTFILES_QUOTED_IF_SPACED=${OBJECTDIR}/Main.o ${OBJECTDIR}/iLEDasm.o ${OBJECTDIR}/iLEDwriteColor.o
+POSSIBLE_DEPFILES=${OBJECTDIR}/Main.o.d ${OBJECTDIR}/iLEDasm.o.d ${OBJECTDIR}/iLEDwriteColor.o.d
 
 # Object Files
-OBJECTFILES=${OBJECTDIR}/iLed.o ${OBJECTDIR}/asmDelay.o ${OBJECTDIR}/Main.o
+OBJECTFILES=${OBJECTDIR}/Main.o ${OBJECTDIR}/iLEDasm.o ${OBJECTDIR}/iLEDwriteColor.o
 
 # Source Files
-SOURCEFILES=iLed.c asmDelay.s Main.c
+SOURCEFILES=Main.c iLEDasm.s iLEDwriteColor.c
 
 
 
@@ -84,53 +84,53 @@ ifneq ($(INFORMATION_MESSAGE), )
 endif
 	${MAKE}  -f nbproject/Makefile-default.mk ${DISTDIR}/EE2361_Final_Project.X.${IMAGE_TYPE}.${OUTPUT_SUFFIX}
 
-MP_PROCESSOR_OPTION=24FJ64GA004
-MP_LINKER_FILE_OPTION=,--script=p24FJ64GA004.gld
+MP_PROCESSOR_OPTION=24FJ64GA002
+MP_LINKER_FILE_OPTION=,--script=p24FJ64GA002.gld
 # ------------------------------------------------------------------------------------
 # Rules for buildStep: compile
 ifeq ($(TYPE_IMAGE), DEBUG_RUN)
-${OBJECTDIR}/iLed.o: iLed.c  .generated_files/flags/default/9095a4de7a2d599a027b834cd1e7cf6d7fba7f19 .generated_files/flags/default/da39a3ee5e6b4b0d3255bfef95601890afd80709
-	@${MKDIR} "${OBJECTDIR}" 
-	@${RM} ${OBJECTDIR}/iLed.o.d 
-	@${RM} ${OBJECTDIR}/iLed.o 
-	${MP_CC} $(MP_EXTRA_CC_PRE)  iLed.c  -o ${OBJECTDIR}/iLed.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -MP -MMD -MF "${OBJECTDIR}/iLed.o.d"      -g -D__DEBUG -D__MPLAB_DEBUGGER_SIMULATOR=1    -omf=elf -DXPRJ_default=$(CND_CONF)    $(COMPARISON_BUILD)  -O0 -msmart-io=1 -Wall -msfr-warn=off    -mdfp="${DFP_DIR}/xc16"
-	
 ${OBJECTDIR}/Main.o: Main.c  .generated_files/flags/default/1f335b2a93457f827b1e1ed6882a6a8517f2302d .generated_files/flags/default/da39a3ee5e6b4b0d3255bfef95601890afd80709
 	@${MKDIR} "${OBJECTDIR}" 
 	@${RM} ${OBJECTDIR}/Main.o.d 
 	@${RM} ${OBJECTDIR}/Main.o 
 	${MP_CC} $(MP_EXTRA_CC_PRE)  Main.c  -o ${OBJECTDIR}/Main.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -MP -MMD -MF "${OBJECTDIR}/Main.o.d"      -g -D__DEBUG -D__MPLAB_DEBUGGER_SIMULATOR=1    -omf=elf -DXPRJ_default=$(CND_CONF)    $(COMPARISON_BUILD)  -O0 -msmart-io=1 -Wall -msfr-warn=off    -mdfp="${DFP_DIR}/xc16"
 	
-else
-${OBJECTDIR}/iLed.o: iLed.c  .generated_files/flags/default/e3955c7061c7b87a2f42547b72c6e6b69108dd97 .generated_files/flags/default/da39a3ee5e6b4b0d3255bfef95601890afd80709
+${OBJECTDIR}/iLEDwriteColor.o: iLEDwriteColor.c  .generated_files/flags/default/a09f83665896832c1db9cf40115b9b4851f25696 .generated_files/flags/default/da39a3ee5e6b4b0d3255bfef95601890afd80709
 	@${MKDIR} "${OBJECTDIR}" 
-	@${RM} ${OBJECTDIR}/iLed.o.d 
-	@${RM} ${OBJECTDIR}/iLed.o 
-	${MP_CC} $(MP_EXTRA_CC_PRE)  iLed.c  -o ${OBJECTDIR}/iLed.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -MP -MMD -MF "${OBJECTDIR}/iLed.o.d"        -g -omf=elf -DXPRJ_default=$(CND_CONF)    $(COMPARISON_BUILD)  -O0 -msmart-io=1 -Wall -msfr-warn=off    -mdfp="${DFP_DIR}/xc16"
+	@${RM} ${OBJECTDIR}/iLEDwriteColor.o.d 
+	@${RM} ${OBJECTDIR}/iLEDwriteColor.o 
+	${MP_CC} $(MP_EXTRA_CC_PRE)  iLEDwriteColor.c  -o ${OBJECTDIR}/iLEDwriteColor.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -MP -MMD -MF "${OBJECTDIR}/iLEDwriteColor.o.d"      -g -D__DEBUG -D__MPLAB_DEBUGGER_SIMULATOR=1    -omf=elf -DXPRJ_default=$(CND_CONF)    $(COMPARISON_BUILD)  -O0 -msmart-io=1 -Wall -msfr-warn=off    -mdfp="${DFP_DIR}/xc16"
 	
+else
 ${OBJECTDIR}/Main.o: Main.c  .generated_files/flags/default/b30f990e32c3b599cbf098f3158629d5b50aa86c .generated_files/flags/default/da39a3ee5e6b4b0d3255bfef95601890afd80709
 	@${MKDIR} "${OBJECTDIR}" 
 	@${RM} ${OBJECTDIR}/Main.o.d 
 	@${RM} ${OBJECTDIR}/Main.o 
 	${MP_CC} $(MP_EXTRA_CC_PRE)  Main.c  -o ${OBJECTDIR}/Main.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -MP -MMD -MF "${OBJECTDIR}/Main.o.d"        -g -omf=elf -DXPRJ_default=$(CND_CONF)    $(COMPARISON_BUILD)  -O0 -msmart-io=1 -Wall -msfr-warn=off    -mdfp="${DFP_DIR}/xc16"
 	
+${OBJECTDIR}/iLEDwriteColor.o: iLEDwriteColor.c  .generated_files/flags/default/199fe87917c2ae38f641dc845066156f9b327d70 .generated_files/flags/default/da39a3ee5e6b4b0d3255bfef95601890afd80709
+	@${MKDIR} "${OBJECTDIR}" 
+	@${RM} ${OBJECTDIR}/iLEDwriteColor.o.d 
+	@${RM} ${OBJECTDIR}/iLEDwriteColor.o 
+	${MP_CC} $(MP_EXTRA_CC_PRE)  iLEDwriteColor.c  -o ${OBJECTDIR}/iLEDwriteColor.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -MP -MMD -MF "${OBJECTDIR}/iLEDwriteColor.o.d"        -g -omf=elf -DXPRJ_default=$(CND_CONF)    $(COMPARISON_BUILD)  -O0 -msmart-io=1 -Wall -msfr-warn=off    -mdfp="${DFP_DIR}/xc16"
+	
 endif
 
 # ------------------------------------------------------------------------------------
 # Rules for buildStep: assemble
 ifeq ($(TYPE_IMAGE), DEBUG_RUN)
-${OBJECTDIR}/asmDelay.o: asmDelay.s  .generated_files/flags/default/16cc1c141a999668fdbe326a93cfdca99896f788 .generated_files/flags/default/da39a3ee5e6b4b0d3255bfef95601890afd80709
+${OBJECTDIR}/iLEDasm.o: iLEDasm.s  .generated_files/flags/default/9744b110cb7a5c0ce6b80d05cec30c3e7062616a .generated_files/flags/default/da39a3ee5e6b4b0d3255bfef95601890afd80709
 	@${MKDIR} "${OBJECTDIR}" 
-	@${RM} ${OBJECTDIR}/asmDelay.o.d 
-	@${RM} ${OBJECTDIR}/asmDelay.o 
-	${MP_CC} $(MP_EXTRA_AS_PRE)  asmDelay.s  -o ${OBJECTDIR}/asmDelay.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -D__DEBUG -D__MPLAB_DEBUGGER_SIMULATOR=1  -omf=elf -DXPRJ_default=$(CND_CONF)    -Wa,-MD,"${OBJECTDIR}/asmDelay.o.d",--defsym=__MPLAB_BUILD=1,--defsym=__MPLAB_DEBUG=1,--defsym=__DEBUG=1,--defsym=__MPLAB_DEBUGGER_SIMULATOR=1,-g,--no-relax$(MP_EXTRA_AS_POST)  -mdfp="${DFP_DIR}/xc16"
+	@${RM} ${OBJECTDIR}/iLEDasm.o.d 
+	@${RM} ${OBJECTDIR}/iLEDasm.o 
+	${MP_CC} $(MP_EXTRA_AS_PRE)  iLEDasm.s  -o ${OBJECTDIR}/iLEDasm.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -D__DEBUG -D__MPLAB_DEBUGGER_SIMULATOR=1  -omf=elf -DXPRJ_default=$(CND_CONF)    -Wa,-MD,"${OBJECTDIR}/iLEDasm.o.d",--defsym=__MPLAB_BUILD=1,--defsym=__MPLAB_DEBUG=1,--defsym=__DEBUG=1,--defsym=__MPLAB_DEBUGGER_SIMULATOR=1,-g,--no-relax$(MP_EXTRA_AS_POST)  -mdfp="${DFP_DIR}/xc16"
 	
 else
-${OBJECTDIR}/asmDelay.o: asmDelay.s  .generated_files/flags/default/99cd7366e04da9c0fe46a8d7c19afc12db13c5c9 .generated_files/flags/default/da39a3ee5e6b4b0d3255bfef95601890afd80709
+${OBJECTDIR}/iLEDasm.o: iLEDasm.s  .generated_files/flags/default/6701673621f950b05eb43becf252427700b20bc9 .generated_files/flags/default/da39a3ee5e6b4b0d3255bfef95601890afd80709
 	@${MKDIR} "${OBJECTDIR}" 
-	@${RM} ${OBJECTDIR}/asmDelay.o.d 
-	@${RM} ${OBJECTDIR}/asmDelay.o 
-	${MP_CC} $(MP_EXTRA_AS_PRE)  asmDelay.s  -o ${OBJECTDIR}/asmDelay.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -omf=elf -DXPRJ_default=$(CND_CONF)    -Wa,-MD,"${OBJECTDIR}/asmDelay.o.d",--defsym=__MPLAB_BUILD=1,-g,--no-relax$(MP_EXTRA_AS_POST)  -mdfp="${DFP_DIR}/xc16"
+	@${RM} ${OBJECTDIR}/iLEDasm.o.d 
+	@${RM} ${OBJECTDIR}/iLEDasm.o 
+	${MP_CC} $(MP_EXTRA_AS_PRE)  iLEDasm.s  -o ${OBJECTDIR}/iLEDasm.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -omf=elf -DXPRJ_default=$(CND_CONF)    -Wa,-MD,"${OBJECTDIR}/iLEDasm.o.d",--defsym=__MPLAB_BUILD=1,-g,--no-relax$(MP_EXTRA_AS_POST)  -mdfp="${DFP_DIR}/xc16"
 	
 endif
 

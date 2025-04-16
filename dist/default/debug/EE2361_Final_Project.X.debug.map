@@ -4,7 +4,7 @@ Tool Name:
   c:\program files\microchip\xc16\v2.10\bin\bin\..\bin/elf-ld.exe
 
 Command:
-  -p24FJ64GA004 \
+  -p24FJ64GA002 \
   --mdfp=C:/Users/madpe/.mchp_packs/Microchip/PIC24F-GA-GB_DFP/1.10.375/xc16 \
   -o \
   dist/default/debug/EE2361_Final_Project.X.debug.elf \
@@ -18,14 +18,14 @@ Command:
   -Lc:/program files/microchip/xc16/v2.10/bin/bin/../../support/dsPIC33C/gld \
   -Lc:/program files/microchip/xc16/v2.10/bin/bin/../../support/dsPIC33E/gld \
   -Lc:/program files/microchip/xc16/v2.10/bin/bin/../../support/dsPIC33F/gld \
-  build/default/debug/iLed.o \
-  build/default/debug/asmDelay.o \
   build/default/debug/Main.o \
+  build/default/debug/iLEDasm.o \
+  build/default/debug/iLEDwriteColor.o \
   --defsym=__MPLAB_BUILD=1 \
   --defsym=__MPLAB_DEBUG=1 \
   --defsym=__DEBUG=1 \
   --defsym=__MPLAB_DEBUGGER_SIMULATOR=1 \
-  -Tp24FJ64GA004.gld.00 \
+  -Tp24FJ64GA002.gld.00 \
   --stack=16 \
   --check-sections \
   --data-init \
@@ -74,10 +74,10 @@ Default Scalar Model: Small
 section                    address   length (PC units)   length (bytes) (dec)
 -------                    -------   -----------------   --------------------
 .text                        0x200                0xfc           0x17a  (378)
-.text                        0x2fc               0x290           0x3d8  (984)
-.dinit                       0x58c                 0x8             0xc  (12)
+.text                        0x2fc               0x2d6           0x441  (1089)
+.dinit                       0x5d2                 0x8             0xc  (12)
 
-                 Total "program" memory used (bytes):          0x55e  (1374) 2%
+                 Total "program" memory used (bytes):          0x5c7  (1479) 2%
 
 
 "data" Memory  [Origin = 0x800, Length = 0x2000]
@@ -124,16 +124,16 @@ External Symbols in Program Memory (by address):
                   0x00047c                  _writePacCol
                   0x0004a4                  _wheel
                   0x000516                  _wheelLoop
-                  0x00054e                  _ETO_wait_100us
-                  0x000554                  _ETO_wait_1ms
-                  0x00055a                  _write_0
-                  0x000568                  _write_1
-                  0x000576                  _main
+                  0x00054e                  _main
+                  0x0005aa                  _ETO_wait_100us
+                  0x0005b0                  _ETO_wait_1ms
+                  0x0005b6                  _write_0
+                  0x0005c4                  _write_1
 
 External Symbols in Program Memory (by name):
 
-                  0x00054e                  _ETO_wait_100us
-                  0x000554                  _ETO_wait_1ms
+                  0x0005aa                  _ETO_wait_100us
+                  0x0005b0                  _ETO_wait_1ms
                   0x0002c8                  __DefaultInterrupt
                   0x0002f0                  ___mulp32eds3
                   0x0002f0                  ___mulp32peds3
@@ -147,7 +147,7 @@ External Symbols in Program Memory (by name):
                   0x00044a                  _getG
                   0x000432                  _getR
                   0x0003a2                  _gradient
-                  0x000576                  _main
+                  0x00054e                  _main
                   0x0003f8                  _packColor
                   0x0002d8                  _rand
                   0x0002fc                  _setup
@@ -156,8 +156,8 @@ External Symbols in Program Memory (by name):
                   0x000516                  _wheelLoop
                   0x00032e                  _writeColor
                   0x00047c                  _writePacCol
-                  0x00055a                  _write_0
-                  0x000568                  _write_1
+                  0x0005b6                  _write_0
+                  0x0005c4                  _write_1
 
 Memory Configuration
 
@@ -174,9 +174,9 @@ CONFIG1          0x00abfe           0x000002
 
 Linker script and memory map
 
-LOAD build/default/debug/iLed.o
-LOAD build/default/debug/asmDelay.o
 LOAD build/default/debug/Main.o
+LOAD build/default/debug/iLEDasm.o
+LOAD build/default/debug/iLEDwriteColor.o
                     0x0001                  __MPLAB_BUILD = 0x1
                     0x0001                  __MPLAB_DEBUG = 0x1
                     0x0001                  __DEBUG = 0x1
@@ -242,36 +242,36 @@ __CONFIG1
 .comment
  *(.comment)
 
-.debug_info       0x000000        0x85b
+.debug_info       0x000000        0x8ed
  *(.debug_info)
- .debug_info      0x000000        0x5fd build/default/debug/iLed.o
- .debug_info      0x0005fd         0x92 build/default/debug/asmDelay.o
- .debug_info      0x00068f        0x140 build/default/debug/Main.o
- .debug_info      0x0007cf         0x8c c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-pic30-elf.a(mulsi3.XX_o)
+ .debug_info      0x000000        0x1c9 build/default/debug/Main.o
+ .debug_info      0x0001c9         0x91 build/default/debug/iLEDasm.o
+ .debug_info      0x00025a        0x607 build/default/debug/iLEDwriteColor.o
+ .debug_info      0x000861         0x8c c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-pic30-elf.a(mulsi3.XX_o)
  *(.gnu.linkonce.wi.*)
 
-.debug_abbrev     0x000000        0x1e6
+.debug_abbrev     0x000000        0x1f9
  *(.debug_abbrev)
- .debug_abbrev    0x000000        0x15a build/default/debug/iLed.o
- .debug_abbrev    0x00015a         0x14 build/default/debug/asmDelay.o
- .debug_abbrev    0x00016e         0x64 build/default/debug/Main.o
- .debug_abbrev    0x0001d2         0x14 c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-pic30-elf.a(mulsi3.XX_o)
+ .debug_abbrev    0x000000         0x77 build/default/debug/Main.o
+ .debug_abbrev    0x000077         0x14 build/default/debug/iLEDasm.o
+ .debug_abbrev    0x00008b        0x15a build/default/debug/iLEDwriteColor.o
+ .debug_abbrev    0x0001e5         0x14 c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-pic30-elf.a(mulsi3.XX_o)
 
-.debug_line       0x000000        0x20c
+.debug_line       0x000000        0x220
  *(.debug_line)
- .debug_line      0x000000        0x150 build/default/debug/iLed.o
- .debug_line      0x000150         0x4a build/default/debug/asmDelay.o
- .debug_line      0x00019a         0x38 build/default/debug/Main.o
- .debug_line      0x0001d2         0x3a c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-pic30-elf.a(mulsi3.XX_o)
+ .debug_line      0x000000         0x43 build/default/debug/Main.o
+ .debug_line      0x000043         0x49 build/default/debug/iLEDasm.o
+ .debug_line      0x00008c        0x15a build/default/debug/iLEDwriteColor.o
+ .debug_line      0x0001e6         0x3a c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-pic30-elf.a(mulsi3.XX_o)
 
 .debug_frame      0x000000        0x168
  *(.debug_frame)
- .debug_frame     0x000000        0x13a build/default/debug/iLed.o
- .debug_frame     0x00013a         0x2e build/default/debug/Main.o
+ .debug_frame     0x000000         0x2e build/default/debug/Main.o
+ .debug_frame     0x00002e        0x13a build/default/debug/iLEDwriteColor.o
 
 .debug_str        0x000000         0x1e
  *(.debug_str)
- .debug_str       0x000000         0x1e build/default/debug/iLed.o
+ .debug_str       0x000000         0x1e build/default/debug/iLEDwriteColor.o
 
 .debug_loc
  *(.debug_loc)
@@ -283,9 +283,9 @@ __CONFIG1
                   0x000000         0xae
  *(.debug_pubnames)
  .debug_pubnames
-                  0x000000         0x93 build/default/debug/iLed.o
+                  0x000000         0x1b build/default/debug/Main.o
  .debug_pubnames
-                  0x000093         0x1b build/default/debug/Main.o
+                  0x00001b         0x93 build/default/debug/iLEDwriteColor.o
 
 .debug_ranges
  *(.debug_ranges)
@@ -293,11 +293,11 @@ __CONFIG1
 .debug_aranges    0x000000         0x70
  *(.debug_aranges)
  .debug_aranges
-                  0x000000         0x18 build/default/debug/iLed.o
+                  0x000000         0x18 build/default/debug/Main.o
  .debug_aranges
-                  0x000018         0x20 build/default/debug/asmDelay.o
+                  0x000018         0x20 build/default/debug/iLEDasm.o
  .debug_aranges
-                  0x000038         0x18 build/default/debug/Main.o
+                  0x000038         0x18 build/default/debug/iLEDwriteColor.o
  .debug_aranges
                   0x000050         0x20 c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-pic30-elf.a(mulsi3.XX_o)
                     0x0000                  WREG0 = 0x0
@@ -652,18 +652,6 @@ __CONFIG1
                     0x02ce                  ODCB = 0x2ce
                     0x02ce                  _ODCB = 0x2ce
                     0x02ce                  _ODCBbits = 0x2ce
-                    0x02d0                  TRISC = 0x2d0
-                    0x02d0                  _TRISC = 0x2d0
-                    0x02d0                  _TRISCbits = 0x2d0
-                    0x02d2                  PORTC = 0x2d2
-                    0x02d2                  _PORTC = 0x2d2
-                    0x02d2                  _PORTCbits = 0x2d2
-                    0x02d4                  LATC = 0x2d4
-                    0x02d4                  _LATC = 0x2d4
-                    0x02d4                  _LATCbits = 0x2d4
-                    0x02d6                  ODCC = 0x2d6
-                    0x02d6                  _ODCC = 0x2d6
-                    0x02d6                  _ODCCbits = 0x2d6
                     0x02fc                  PADCFG1 = 0x2fc
                     0x02fc                  _PADCFG1 = 0x2fc
                     0x02fc                  _PADCFG1bits = 0x2fc
@@ -833,21 +821,6 @@ __CONFIG1
                     0x06ce                  RPOR7 = 0x6ce
                     0x06ce                  _RPOR7 = 0x6ce
                     0x06ce                  _RPOR7bits = 0x6ce
-                    0x06d0                  RPOR8 = 0x6d0
-                    0x06d0                  _RPOR8 = 0x6d0
-                    0x06d0                  _RPOR8bits = 0x6d0
-                    0x06d2                  RPOR9 = 0x6d2
-                    0x06d2                  _RPOR9 = 0x6d2
-                    0x06d2                  _RPOR9bits = 0x6d2
-                    0x06d4                  RPOR10 = 0x6d4
-                    0x06d4                  _RPOR10 = 0x6d4
-                    0x06d4                  _RPOR10bits = 0x6d4
-                    0x06d6                  RPOR11 = 0x6d6
-                    0x06d6                  _RPOR11 = 0x6d6
-                    0x06d6                  _RPOR11bits = 0x6d6
-                    0x06d8                  RPOR12 = 0x6d8
-                    0x06d8                  _RPOR12 = 0x6d8
-                    0x06d8                  _RPOR12bits = 0x6d8
                     0x0740                  RCON = 0x740
                     0x0740                  _RCON = 0x740
                     0x0740                  _RCONbits = 0x740
@@ -918,16 +891,16 @@ LOAD data_init
 .debug_pubtypes
                   0x000070         0x5f
  .debug_pubtypes
-                  0x000070         0x4d build/default/debug/iLed.o
+                  0x000070         0x12 build/default/debug/Main.o
  .debug_pubtypes
-                  0x0000bd         0x12 build/default/debug/Main.o
+                  0x000082         0x4d build/default/debug/iLEDwriteColor.o
 
 __c30_signature
                   0x0000cf         0x24
  __c30_signature
-                  0x0000cf          0x6 build/default/debug/iLed.o
+                  0x0000cf          0x6 build/default/debug/Main.o
  __c30_signature
-                  0x0000d5          0x6 build/default/debug/Main.o
+                  0x0000d5          0x6 build/default/debug/iLEDwriteColor.o
  __c30_signature
                   0x0000db          0x6 c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-pic30-elf.a(crt0_standard.o)
  __c30_signature
@@ -947,8 +920,8 @@ __c30_signature
 .config_IESO      0x00abfc          0x2
  .config_IESO     0x00abfc          0x2 build/default/debug/Main.o
 
-.text             0x0002fc        0x290
- .text            0x0002fc        0x252 build/default/debug/iLed.o
+.text             0x0002fc        0x2d6
+ .text            0x0002fc        0x252 build/default/debug/iLEDwriteColor.o
                   0x0002fc                  _setup
                   0x000314                  _delay
                   0x00032e                  _writeColor
@@ -960,13 +933,13 @@ __c30_signature
                   0x00047c                  _writePacCol
                   0x0004a4                  _wheel
                   0x000516                  _wheelLoop
- .text            0x00054e         0x28 build/default/debug/asmDelay.o
-                  0x00054e                  _ETO_wait_100us
-                  0x000554                  _ETO_wait_1ms
-                  0x00055a                  _write_0
-                  0x000568                  _write_1
- .text            0x000576         0x16 build/default/debug/Main.o
-                  0x000576                  _main
+ .text            0x00054e         0x5c build/default/debug/Main.o
+                  0x00054e                  _main
+ .text            0x0005aa         0x28 build/default/debug/iLEDasm.o
+                  0x0005aa                  _ETO_wait_100us
+                  0x0005b0                  _ETO_wait_1ms
+                  0x0005b6                  _write_0
+                  0x0005c4                  _write_1
 
-.dinit            0x00058c          0x8
- .dinit           0x00058c          0x8 data_init
+.dinit            0x0005d2          0x8
+ .dinit           0x0005d2          0x8 data_init
