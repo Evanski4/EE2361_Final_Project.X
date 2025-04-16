@@ -1,8 +1,14 @@
 #include "iLEDasm.h"
 #include "stdlib.h" // for psuedo random num generation
+<<<<<<< HEAD
 //#include "iLEDwriteColor.h"
 #include "stdlib.h"
 #include "xc.h"
+=======
+#include "lcdLib.h"
+
+#define DEBOUNCE_DELAY 50
+>>>>>>> da993f678176ee775d24ba14006aa82bf1fba935
 #pragma config ICS = PGx1          // Comm Channel Select (Emulator EMUC1/EMUD1 pins are shared with PGC1/PGD1)
 #pragma config FWDTEN = OFF        // Watchdog Timer Enable (Watchdog Timer is disabled)
 #pragma config GWRP = OFF          // General Code Segment Write Protect (Writes to program memory are allowed)
@@ -16,6 +22,8 @@
 #pragma config OSCIOFNC = ON       // Primary Oscillator I/O Function (CLKO/RC15 functions as I/O pin)
 #pragma config FCKSM = CSECME      // Clock Switching and Monitor (Clock switching is enabled,
 #pragma config FNOSC = FRCPLL // Oscillator Select (Fast RC Oscillator with PLL module (FRCPLL))
+
+void waitForButtonPress(void);
 
 int main (void){
 //    setup();
@@ -42,6 +50,71 @@ int main (void){
                 break;
             }
     }
-    
+    initLCD();
+    // working on the starting screen
+    while (1) {
+        // Initial start screen
+        clear();
+        lcd_setCursor(0, 0);
+        lcd_printString("Press button to");
+        lcd_setCursor(1, 0);
+        lcd_printString("start");
+        waitForButtonPress();
+
+        // Game instructions
+        clear();
+        lcd_setCursor(0, 0);
+        lcd_printString("Press button when light turns green");
+        lcd_setCursor(1, 0);
+        lcd_printString("You have 5 rounds");
+        delay_ms(2500);
+
+        clear();
+        lcd_setCursor(0, 0);
+        lcd_printString("Get ready...");
+        delay_ms(1500);
+        // Game loop: 5 rounds
+        for (int round = 1; round <= 5; round++) {
+            clear();
+            lcd_setCursor(0, 0);
+            lcd_printString("Round ");
+            lcd_printChar('0' + round);
+            delay_ms(1000);
+
+            int waitTime = 2000 + rand() % 6001; // 2 to 8 sec
+            delay_ms(waitTime);
+
+            clear();
+            lcd_setCursor(0, 0);
+            lcd_printString("GO!");
+            LED = 1;
+
+            while (BUTTON == 1); // wait for button press
+            LED = 0;
+
+            lcd_setCursor(1, 0);
+            lcd_printString("Nice!");
+            delay_ms(1500);
+        }
+
+        // Play again 
+        clear();
+        lcd_setCursor(0, 0);
+        lcd_printString("Game Over!");
+        lcd_setCursor(1, 0);
+        lcd_printString("Play again?");
+
+        delay_ms(1000);
+        waitForButtonPress();
+    }
     return 0;
 }
+void waitForButtonPress(void) {
+    // Wait for the button press (debounced)
+    while (BUTTON == 1); // Wait for button to be released
+    delay_ms(DEBOUNCE_DELAY); // Debounce delay
+    while (BUTTON == 0); // Wait for button to be pressed
+    delay_ms(DEBOUNCE_DELAY); // Debounce delay
+    while (BUTTON == 1); // Wait for button to be released
+}
+
