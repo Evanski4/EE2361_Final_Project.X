@@ -85,18 +85,7 @@ int main (void){
 //            int waitTime = 2000 + rand() % 6001; // 2 to 8 sec
 //            delay_ms(waitTime);
 //
-//            clear();
-//            lcd_setCursor(0, 0);
-//            lcd_printString("GO!");
-//            LED = 1;
-//
-//            while (BUTTON == 1); // wait for button press
-//            LED = 0;
-//
-//            lcd_setCursor(1, 0);
-//            lcd_printString("Nice!");
-//            delay_ms(1500);
-//        }
+//        
 //
 //        // Play again 
 //        clear();
