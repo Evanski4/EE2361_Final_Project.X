@@ -11,19 +11,6 @@
 
 
 // CW1: FLASH CONFIGURATION WORD 1 (see PIC24 Family Reference Manual 24.1)
-#pragma config ICS = PGx1          // Comm Channel Select (Emulator EMUC1/EMUD1 pins are shared with PGC1/PGD1)
-#pragma config FWDTEN = OFF        // Watchdog Timer Enable (Watchdog Timer is disabled)
-#pragma config GWRP = OFF          // General Code Segment Write Protect (Writes to program memory are allowed)
-#pragma config GCP = OFF           // General Code Segment Code Protect (Code protection is disabled)
-#pragma config JTAGEN = OFF        // JTAG Port Enable (JTAG port is disabled)
-
-
-// CW2: FLASH CONFIGURATION WORD 2 (see PIC24 Family Reference Manual 24.1)
-#pragma config I2C1SEL = PRI       // I2C1 Pin Location Select (Use default SCL1/SDA1 pins)
-#pragma config IOL1WAY = OFF       // IOLOCK Protection (IOLOCK may be changed via unlocking seq)
-#pragma config OSCIOFNC = ON       // Primary Oscillator I/O Function (CLKO/RC15 functions as I/O pin)
-#pragma config FCKSM = CSECME      // Clock Switching and Monitor (Clock switching is enabled,
-#pragma config FNOSC = FRCPLL // Oscillator Select (Fast RC Oscillator with PLL module (FRCPLL))
 
 #define PERIOD 5 //Compiler constant
     void setup(void){
@@ -176,79 +163,3 @@
           }
 }
 
-    int main(void) {
-        setup();
-        
-        //writeColor(255,0,130);
-
-       // writeColor(0,100,100);
-       // writeColor(0,255,0);
-        //gradient(0);
-       // wheel(255);
-       // writePacCol(wheel(255));
-       //writeColor(0,255,0);
-        //delay(1000);
-       // uint32_t x;
-        //x = wheel(135);
-        //writePacCol(wheel(127));
-      //  writeColor(0,0,0);
-        delay(150);
-        while(1){
-        
-            wheelLoop();
-
-
-            /* GRADIENT
-         *     for(int byteFramNum = 255; byteFramNum >0; byteFramNum--){
-            int byteR;
-            int byteB;
-            byteR=byteFramNum;
-            byteB= t -byteFramNum;
-            writeColor(byteR,0,byteB);
-            delay(1);
-            }
-
-            for(int byteFramNum = 255; byteFramNum >0; byteFramNum--){
-            int byteR,byteB;
-            byteB=byteFramNum;
-            byteR=255-byteFramNum;
-            writeColor(byteR,0,byteB);
-            delay(1);
-            }*/
-        //ETO_wait_100us();
-
-           // writeColor(0,255,0);
-
-
-       /*
-         write_1(); //First write_1
-         write_1(); //Second write_1
-         write_1();// Third write_1
-         write_1();// Fourth write_1
-         write_1();// Fifth write_1
-         write_1();// Sixth write_1
-         write_1();// Seventh write_1
-         write_1();// Eighth write_1
-
-         write_1(); //First write_1
-         write_1(); //Second write_1
-         write_1();// Third write_1
-         write_1();// Fourth write_1
-         write_1();// Fifth write_1
-         write_1();// Sixth write_1
-         write_1();// Seventh write_1
-         write_1();// Eighth write_1
-
-         write_0();// Ninth write_0
-         write_0();// Tenth write_0
-         write_0();// Eleventh write_0
-         write_0();// Twelfth write_0
-         write_0();// Thirteenth write_0
-         write_0();// Fourteenth write_0
-         write_0();// Fifteenth write_0
-         write_0(); 
-         ETO_wait_100us();*/
-        }
-
-        return 0;
-    }

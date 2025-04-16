@@ -51,17 +51,17 @@ OBJECTDIR=build/${CND_CONF}/${IMAGE_TYPE}
 DISTDIR=dist/${CND_CONF}/${IMAGE_TYPE}
 
 # Source Files Quoted if spaced
-SOURCEFILES_QUOTED_IF_SPACED=iLed.c asmDelay.s
+SOURCEFILES_QUOTED_IF_SPACED=iLed.c asmDelay.s Main.c
 
 # Object Files Quoted if spaced
-OBJECTFILES_QUOTED_IF_SPACED=${OBJECTDIR}/iLed.o ${OBJECTDIR}/asmDelay.o
-POSSIBLE_DEPFILES=${OBJECTDIR}/iLed.o.d ${OBJECTDIR}/asmDelay.o.d
+OBJECTFILES_QUOTED_IF_SPACED=${OBJECTDIR}/iLed.o ${OBJECTDIR}/asmDelay.o ${OBJECTDIR}/Main.o
+POSSIBLE_DEPFILES=${OBJECTDIR}/iLed.o.d ${OBJECTDIR}/asmDelay.o.d ${OBJECTDIR}/Main.o.d
 
 # Object Files
-OBJECTFILES=${OBJECTDIR}/iLed.o ${OBJECTDIR}/asmDelay.o
+OBJECTFILES=${OBJECTDIR}/iLed.o ${OBJECTDIR}/asmDelay.o ${OBJECTDIR}/Main.o
 
 # Source Files
-SOURCEFILES=iLed.c asmDelay.s
+SOURCEFILES=iLed.c asmDelay.s Main.c
 
 
 
@@ -95,12 +95,24 @@ ${OBJECTDIR}/iLed.o: iLed.c  .generated_files/flags/default/9095a4de7a2d599a027b
 	@${RM} ${OBJECTDIR}/iLed.o 
 	${MP_CC} $(MP_EXTRA_CC_PRE)  iLed.c  -o ${OBJECTDIR}/iLed.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -MP -MMD -MF "${OBJECTDIR}/iLed.o.d"      -g -D__DEBUG -D__MPLAB_DEBUGGER_SIMULATOR=1    -omf=elf -DXPRJ_default=$(CND_CONF)    $(COMPARISON_BUILD)  -O0 -msmart-io=1 -Wall -msfr-warn=off    -mdfp="${DFP_DIR}/xc16"
 	
+${OBJECTDIR}/Main.o: Main.c  .generated_files/flags/default/1f335b2a93457f827b1e1ed6882a6a8517f2302d .generated_files/flags/default/da39a3ee5e6b4b0d3255bfef95601890afd80709
+	@${MKDIR} "${OBJECTDIR}" 
+	@${RM} ${OBJECTDIR}/Main.o.d 
+	@${RM} ${OBJECTDIR}/Main.o 
+	${MP_CC} $(MP_EXTRA_CC_PRE)  Main.c  -o ${OBJECTDIR}/Main.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -MP -MMD -MF "${OBJECTDIR}/Main.o.d"      -g -D__DEBUG -D__MPLAB_DEBUGGER_SIMULATOR=1    -omf=elf -DXPRJ_default=$(CND_CONF)    $(COMPARISON_BUILD)  -O0 -msmart-io=1 -Wall -msfr-warn=off    -mdfp="${DFP_DIR}/xc16"
+	
 else
 ${OBJECTDIR}/iLed.o: iLed.c  .generated_files/flags/default/e3955c7061c7b87a2f42547b72c6e6b69108dd97 .generated_files/flags/default/da39a3ee5e6b4b0d3255bfef95601890afd80709
 	@${MKDIR} "${OBJECTDIR}" 
 	@${RM} ${OBJECTDIR}/iLed.o.d 
 	@${RM} ${OBJECTDIR}/iLed.o 
 	${MP_CC} $(MP_EXTRA_CC_PRE)  iLed.c  -o ${OBJECTDIR}/iLed.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -MP -MMD -MF "${OBJECTDIR}/iLed.o.d"        -g -omf=elf -DXPRJ_default=$(CND_CONF)    $(COMPARISON_BUILD)  -O0 -msmart-io=1 -Wall -msfr-warn=off    -mdfp="${DFP_DIR}/xc16"
+	
+${OBJECTDIR}/Main.o: Main.c  .generated_files/flags/default/b30f990e32c3b599cbf098f3158629d5b50aa86c .generated_files/flags/default/da39a3ee5e6b4b0d3255bfef95601890afd80709
+	@${MKDIR} "${OBJECTDIR}" 
+	@${RM} ${OBJECTDIR}/Main.o.d 
+	@${RM} ${OBJECTDIR}/Main.o 
+	${MP_CC} $(MP_EXTRA_CC_PRE)  Main.c  -o ${OBJECTDIR}/Main.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -MP -MMD -MF "${OBJECTDIR}/Main.o.d"        -g -omf=elf -DXPRJ_default=$(CND_CONF)    $(COMPARISON_BUILD)  -O0 -msmart-io=1 -Wall -msfr-warn=off    -mdfp="${DFP_DIR}/xc16"
 	
 endif
 
