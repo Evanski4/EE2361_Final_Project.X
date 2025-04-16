@@ -19,12 +19,13 @@ int main (void){
 //    setup();
     /* Trying to make randim color generation;
      * After random amount of time but at least 2 seconds and less than 8 
+     * output from RA0
      */
     int randomTimeNum;
     while(1){
       
-        randomNum = 2 + rand() % (8-2 + 1);
-        delay(randomNum);
+        randomTimeNum = 2 + rand() % (8-2 + 1);
+        delay(randomTimeNum);
         
     }
     
