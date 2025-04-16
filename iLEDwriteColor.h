@@ -6,9 +6,6 @@
  */
 
 
-#ifndef ILEDWRITECOLOR_H
-#define	ILEDWRITECOLOR_H
-#define PERIOD 5 //Compiler constant
     void setup(void);
      void delay(int delay_in_ms);    
     /*Writes the specified RGB value to the iLED
@@ -31,11 +28,7 @@
              * Blu: value of red in RGB
              * Return: The specified RGB value 
              */
-            uint32_t packColor(unsigned char Red, unsigned char Grn, unsigned char Blu);
-        /*Gets the Red value from a unint32_t representing a RGB value
-         * RGBval: Value of RGB that must pull red from
-         * returns: Value of Red as a unsigned char 0-255
-         */
+ 
        unsigned char getR(unsigned long int RGBval);
         /*Gets the Green value from a unint32_t representing a RGB value
          * RGBval: Value of RGB that must pull green from
@@ -47,15 +40,7 @@
          * returns: Value of Blue as a unsigned char 0-255
          */
         unsigned char getB(unsigned long int RGBval);
-        /*using the previous functions decodes the packed color and writes it using the writeColor function
-         *PackedColor: Color to be written to iLED
-         */
-        void writePacCol(uint32_t PackedColor);
-        /*Cycles through the colors of RGB starting at a specified value
-         *WheelPos:Value from 0 -255 representing a color
-         * return: The color specified
-         */
-        uint32_t wheel(unsigned char WheelPos);
+
              
       void wheelLoop();
 
@@ -71,5 +56,5 @@ extern "C" {
 }
 #endif
 
-#endif	/* ILEDWRITECOLOR_H */
+
 

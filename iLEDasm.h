@@ -5,8 +5,8 @@
  * Created on February 11, 2025, 4:38 PM
  */
 
-#ifndef ASSEMBLYFILE_H
-#define	ASSEMBLYFILE_H
+#ifndef iLEDasm_H
+#define	iLEDasm_H
 
 #ifdef	__cplusplus
 extern "C" {

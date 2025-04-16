@@ -90,12 +90,7 @@
              * Blu: value of red in RGB
              * Return: The specified RGB value 
              */
-            uint32_t packColor(unsigned char Red, unsigned char Grn, unsigned char Blu){
-                unsigned long int RGBval = 0;
-                RGBval = ((long) Red << 16) | ((long) Grn << 8) | ((long) Blu);
-                return RGBval;
 
-            } 
         /*Gets the Red value from a unint32_t representing a RGB value
          * RGBval: Value of RGB that must pull red from
          * returns: Value of Red as a unsigned char 0-255
@@ -137,29 +132,29 @@
          *WheelPos:Value from 0 -255 representing a color
          * return: The color specified
          */
-        uint32_t wheel(unsigned char WheelPos){
-             WheelPos = 255 - WheelPos;
-        if(WheelPos < 85) {
-          return packColor(255 - WheelPos * 3, 0, WheelPos * 3);
-        }
-        if(WheelPos < 170) {
-          WheelPos -= 85;
-          return packColor(0, WheelPos * 3, 255 - WheelPos * 3);
-        }
-        WheelPos -= 170;
-        return packColor(WheelPos * 3, 255 - WheelPos * 3, 0);
-              }
-      void wheelLoop() {
-          int i;
-          int j;
-          //dark to white light
-          for (i = 0; i <= 255; i++) {
-              writePacCol(wheel(i));
-          }
-
-          //white to dark
-          for (j = 255; j >= 0; j--) {
-              writePacCol(wheel(j));
-          }
-}
+//        uint32_t wheel(unsigned char WheelPos){
+//             WheelPos = 255 - WheelPos;
+//        if(WheelPos < 85) {
+//          return packColor(255 - WheelPos * 3, 0, WheelPos * 3);
+//        }
+//        if(WheelPos < 170) {
+//          WheelPos -= 85;
+//          return packColor(0, WheelPos * 3, 255 - WheelPos * 3);
+//        }
+//        WheelPos -= 170;
+//        return packColor(WheelPos * 3, 255 - WheelPos * 3, 0);
+//              }
+//      void wheelLoop() {
+//          int i;
+//          int j;
+//          //dark to white light
+//          for (i = 0; i <= 255; i++) {
+//              writePacCol(wheel(i));
+//          }
+//
+//          //white to dark
+//          for (j = 255; j >= 0; j--) {
+//              writePacCol(wheel(j));
+//          }
+//}
 

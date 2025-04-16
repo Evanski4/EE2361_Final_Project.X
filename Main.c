@@ -1,7 +1,7 @@
 #include "iLEDasm.h"
 #include "stdlib.h" // for psuedo random num generation
 
-//#include "iLEDwriteColor.h"
+#include "iLEDwriteColor.h"
 #include "stdlib.h"
 #include "xc.h"
 
@@ -20,7 +20,8 @@
 #pragma config IOL1WAY = OFF       // IOLOCK Protection (IOLOCK may be changed via unlocking seq)
 #pragma config OSCIOFNC = ON       // Primary Oscillator I/O Function (CLKO/RC15 functions as I/O pin)
 #pragma config FCKSM = CSECME      // Clock Switching and Monitor (Clock switching is enabled,
-#pragma config FNOSC = FRCPLL // Oscillator Select (Fast RC Oscillator with PLL module (FRCPLL))
+#pragma config FNOSC = FRCPLL      // Oscillator Select (Fast RC Oscillator with PLL module (FRCPLL))
+
 
 //void waitForButtonPress(void);
 
@@ -48,8 +49,8 @@ int main (void){
                 writeColor(0,0,255);
                 break;
             }
-    }
-}
+    } }
+
 
 //    initLCD();
 //    // working on the starting screen
