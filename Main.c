@@ -24,19 +24,26 @@
 
 
 //void waitForButtonPress(void);
-
+void iLedSetup(void){
+        CLKDIVbits.RCDIV = 0;  //Set RCDIV=1:1 (default 2:1) 32MHz or FCY/2=16M
+    AD1PCFG = 0x9fff;            //sets all pins to digital I/O
+    TRISA = 0b1111111111111110;  //set port A to inputs,
+    LATA = 0x0000;               //Set all of port A to HIGH
+   
+}
 int main (void){
 //    setup();
     /* Trying to make randim color generation;
      * After random amount of time but at least 2 seconds and less than 8 
      * output from RA0
      */
+    iLedSetup();
     int randomTimeNum;
     int randomColor;
     while(1){
       
         randomTimeNum = 2 + rand() % (8-2 + 1);
-        delay(randomTimeNum*100);
+        delay(randomTimeNum*1000);
         randomColor = 1 + rand() % (3-1+1);
         switch(randomColor){
             case 1:
