@@ -36,7 +36,7 @@ void delay_ms(unsigned int ms) {
 void delay(int delay_in_ms) {
     int i;
     for (i = 0; i < delay_in_ms; i++) {
-        delay1ms();
+        ETO_wait_1ms();
     }
 }
 
@@ -63,7 +63,7 @@ void write_color(int r, int g, int b) {
         else    write_0();    
     }  
    
-    delay100us();
+    ETO_wait_100us();
      
 }
 
