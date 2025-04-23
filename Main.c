@@ -43,7 +43,7 @@ void delay_ms(unsigned int ms) {
 
 void write_color(int r, int g, int b) {
     int i;
-   
+    
    
     //red
     for (i = 7; i >= 0; i--) {
@@ -161,7 +161,7 @@ void lcd_printStr(const char *str) {
         lcd_printChar(*str++);
     }
 }
-
+//TRISB = "AT+ROLE=1\r\n";
 void clear(void) {
     lcd_cmd(0x01);
 }

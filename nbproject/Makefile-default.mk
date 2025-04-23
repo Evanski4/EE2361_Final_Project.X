@@ -51,17 +51,17 @@ OBJECTDIR=build/${CND_CONF}/${IMAGE_TYPE}
 DISTDIR=dist/${CND_CONF}/${IMAGE_TYPE}
 
 # Source Files Quoted if spaced
-SOURCEFILES_QUOTED_IF_SPACED=Main.c iLEDasm.s iLEDwriteColor.c
+SOURCEFILES_QUOTED_IF_SPACED=Main.c iLEDasm.s iLEDwriteColor.c bluetooth.c
 
 # Object Files Quoted if spaced
-OBJECTFILES_QUOTED_IF_SPACED=${OBJECTDIR}/Main.o ${OBJECTDIR}/iLEDasm.o ${OBJECTDIR}/iLEDwriteColor.o
-POSSIBLE_DEPFILES=${OBJECTDIR}/Main.o.d ${OBJECTDIR}/iLEDasm.o.d ${OBJECTDIR}/iLEDwriteColor.o.d
+OBJECTFILES_QUOTED_IF_SPACED=${OBJECTDIR}/Main.o ${OBJECTDIR}/iLEDasm.o ${OBJECTDIR}/iLEDwriteColor.o ${OBJECTDIR}/bluetooth.o
+POSSIBLE_DEPFILES=${OBJECTDIR}/Main.o.d ${OBJECTDIR}/iLEDasm.o.d ${OBJECTDIR}/iLEDwriteColor.o.d ${OBJECTDIR}/bluetooth.o.d
 
 # Object Files
-OBJECTFILES=${OBJECTDIR}/Main.o ${OBJECTDIR}/iLEDasm.o ${OBJECTDIR}/iLEDwriteColor.o
+OBJECTFILES=${OBJECTDIR}/Main.o ${OBJECTDIR}/iLEDasm.o ${OBJECTDIR}/iLEDwriteColor.o ${OBJECTDIR}/bluetooth.o
 
 # Source Files
-SOURCEFILES=Main.c iLEDasm.s iLEDwriteColor.c
+SOURCEFILES=Main.c iLEDasm.s iLEDwriteColor.c bluetooth.c
 
 
 
@@ -101,6 +101,12 @@ ${OBJECTDIR}/iLEDwriteColor.o: iLEDwriteColor.c  .generated_files/flags/default/
 	@${RM} ${OBJECTDIR}/iLEDwriteColor.o 
 	${MP_CC} $(MP_EXTRA_CC_PRE)  iLEDwriteColor.c  -o ${OBJECTDIR}/iLEDwriteColor.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -MP -MMD -MF "${OBJECTDIR}/iLEDwriteColor.o.d"      -g -D__DEBUG     -omf=elf -DXPRJ_default=$(CND_CONF)    $(COMPARISON_BUILD)  -O0 -msmart-io=1 -Wall -msfr-warn=off    -mdfp="${DFP_DIR}/xc16"
 	
+${OBJECTDIR}/bluetooth.o: bluetooth.c  .generated_files/flags/default/4d8b9278bacf2ea8f6920cc68670f8db0c82eaca .generated_files/flags/default/da39a3ee5e6b4b0d3255bfef95601890afd80709
+	@${MKDIR} "${OBJECTDIR}" 
+	@${RM} ${OBJECTDIR}/bluetooth.o.d 
+	@${RM} ${OBJECTDIR}/bluetooth.o 
+	${MP_CC} $(MP_EXTRA_CC_PRE)  bluetooth.c  -o ${OBJECTDIR}/bluetooth.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -MP -MMD -MF "${OBJECTDIR}/bluetooth.o.d"      -g -D__DEBUG     -omf=elf -DXPRJ_default=$(CND_CONF)    $(COMPARISON_BUILD)  -O0 -msmart-io=1 -Wall -msfr-warn=off    -mdfp="${DFP_DIR}/xc16"
+	
 else
 ${OBJECTDIR}/Main.o: Main.c  .generated_files/flags/default/b30f990e32c3b599cbf098f3158629d5b50aa86c .generated_files/flags/default/da39a3ee5e6b4b0d3255bfef95601890afd80709
 	@${MKDIR} "${OBJECTDIR}" 
@@ -113,6 +119,12 @@ ${OBJECTDIR}/iLEDwriteColor.o: iLEDwriteColor.c  .generated_files/flags/default/
 	@${RM} ${OBJECTDIR}/iLEDwriteColor.o.d 
 	@${RM} ${OBJECTDIR}/iLEDwriteColor.o 
 	${MP_CC} $(MP_EXTRA_CC_PRE)  iLEDwriteColor.c  -o ${OBJECTDIR}/iLEDwriteColor.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -MP -MMD -MF "${OBJECTDIR}/iLEDwriteColor.o.d"        -g -omf=elf -DXPRJ_default=$(CND_CONF)    $(COMPARISON_BUILD)  -O0 -msmart-io=1 -Wall -msfr-warn=off    -mdfp="${DFP_DIR}/xc16"
+	
+${OBJECTDIR}/bluetooth.o: bluetooth.c  .generated_files/flags/default/d0713335fccff13705bc514efd53a2870b925f18 .generated_files/flags/default/da39a3ee5e6b4b0d3255bfef95601890afd80709
+	@${MKDIR} "${OBJECTDIR}" 
+	@${RM} ${OBJECTDIR}/bluetooth.o.d 
+	@${RM} ${OBJECTDIR}/bluetooth.o 
+	${MP_CC} $(MP_EXTRA_CC_PRE)  bluetooth.c  -o ${OBJECTDIR}/bluetooth.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -MP -MMD -MF "${OBJECTDIR}/bluetooth.o.d"        -g -omf=elf -DXPRJ_default=$(CND_CONF)    $(COMPARISON_BUILD)  -O0 -msmart-io=1 -Wall -msfr-warn=off    -mdfp="${DFP_DIR}/xc16"
 	
 endif
 

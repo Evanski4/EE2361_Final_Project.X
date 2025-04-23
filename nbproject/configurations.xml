@@ -22,6 +22,7 @@
       <itemPath>Main.c</itemPath>
       <itemPath>iLEDasm.s</itemPath>
       <itemPath>iLEDwriteColor.c</itemPath>
+      <itemPath>bluetooth.c</itemPath>
     </logicalFolder>
   </logicalFolder>
   <projectmakefile>Makefile</projectmakefile>
@@ -1268,6 +1269,8 @@
                   value="${memories.instruction.ram.ranges}"/>
         <property key="memories.programmemory" value="true"/>
         <property key="memories.programmemory.ranges" value="0-abfb"/>
+        <property key="programmerToGoFilePath"
+                  value="C:/Users/madpe/EE2361_FinalProject/EE2361_Final_Project.X/debug/default/EE2361_Final_Project_ptg"/>
         <property key="programoptions.donoteraseauxmem" value="false"/>
         <property key="programoptions.eraseb4program" value="true"/>
         <property key="programoptions.pgmentry.voltage" value="low"/>
