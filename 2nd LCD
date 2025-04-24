@@ -1,0 +1,121 @@
+#pragma config ICS = PGx1
+#pragma config FWDTEN = OFF
+#pragma config GWRP = OFF
+#pragma config GCP = OFF
+#pragma config JTAGEN = OFF
+#pragma config I2C1SEL = PRI
+#pragma config IOL1WAY = OFF
+#pragma config OSCIOFNC = ON
+#pragma config FCKSM = CSECME
+#pragma config FNOSC = FRCPLL
+
+#include "xc.h"
+#include <string.h>
+
+#define FREQ 16000000
+#define BAUD 9600
+
+#define LCDaddy 0b0111100
+#define addressWrite (LCDaddy << 1) & 0b11111110
+#define commandControlByte 0x00
+#define dataControlByte 0x40
+
+void delay_ms(unsigned int ms) {
+    while (ms-- > 0) {
+        asm("repeat #15998");
+        asm("nop");
+    }
+}
+
+void uart_init(void) {
+    TRISBbits.TRISB7 = 1;  // RX input
+    TRISBbits.TRISB6 = 0;  // TX output
+    U1BRG = (FREQ / (16 * BAUD)) - 1;
+    U1MODEbits.UARTEN = 1;
+    U1STAbits.UTXEN = 1;
+}
+
+char uart_readChar(void) {
+    while (!U1STAbits.URXDA);  // Wait for data
+    return U1RXREG;
+}
+
+void lcd_cmd(char pkg) {
+    I2C1CONbits.SEN = 1; while (I2C1CONbits.SEN);
+    _MI2C1IF = 0; I2C1TRN = addressWrite; while (I2C1STATbits.TRSTAT && !_MI2C1IF);
+    _MI2C1IF = 0; I2C1TRN = commandControlByte; while (I2C1STATbits.TRSTAT && !_MI2C1IF);
+    _MI2C1IF = 0; I2C1TRN = pkg; while (I2C1STATbits.TRSTAT && !_MI2C1IF);
+    I2C1CONbits.PEN = 1; while (I2C1CONbits.PEN);
+}
+
+void initLCD(void) {
+    lcd_cmd(0x3A); lcd_cmd(0x09); lcd_cmd(0x06); lcd_cmd(0x1E); lcd_cmd(0x39);
+    lcd_cmd(0x1B); lcd_cmd(0x6E); lcd_cmd(0x56); lcd_cmd(0x7A); lcd_cmd(0x38);
+    lcd_cmd(0x0F); lcd_cmd(0x3A); lcd_cmd(0x09); lcd_cmd(0x1A); lcd_cmd(0x3C);
+    lcd_cmd(0x01);
+}
+
+void lcd_setCursor(char x, char y) {
+    lcd_cmd(((0x20) * x + y) | 0x80);
+}
+
+void lcd_printChar(char c) {
+    I2C1CONbits.SEN = 1; while (I2C1CONbits.SEN);
+    _MI2C1IF = 0; I2C1TRN = addressWrite; while (I2C1STATbits.TRSTAT && !_MI2C1IF);
+    _MI2C1IF = 0; I2C1TRN = dataControlByte; while (I2C1STATbits.TRSTAT && !_MI2C1IF);
+    _MI2C1IF = 0; I2C1TRN = c; while (I2C1STATbits.TRSTAT && !_MI2C1IF);
+    I2C1CONbits.PEN = 1; while (I2C1CONbits.PEN);
+}
+
+void lcd_printStr(const char *str) {
+    while (*str) lcd_printChar(*str++);
+}
+
+void clear(void) {
+    lcd_cmd(0x01);
+}
+
+void setup(void) {
+    CLKDIVbits.RCDIV = 0;
+    AD1PCFG = 0xFFFF;
+
+    // I2C setup
+    I2C1CONbits.I2CEN = 0;
+    I2C1BRG = 0x9D;
+    I2C1CONbits.I2CEN = 1;
+
+    CNPU2bits.CN23PUE = 1;
+    delay_ms(10);
+
+    // UART
+    uart_init();
+
+    // LCD
+    initLCD();
+    clear();
+    lcd_setCursor(0, 0);
+    lcd_printStr("Waiting...");
+}
+
+int main(void) {
+    setup();
+
+    char buffer[32];
+    int i = 0;
+
+    while (1) {
+        char c = uart_readChar();
+
+        if (c == '\r' || c == '\n') {
+            buffer[i] = '\0';
+            clear();
+            lcd_setCursor(0, 0);
+            lcd_printStr(buffer);
+            i = 0;
+        } else if (i < sizeof(buffer) - 1) {
+            buffer[i++] = c;
+        }
+    }
+
+    return 0;
+}
