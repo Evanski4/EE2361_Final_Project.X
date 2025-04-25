@@ -14,6 +14,10 @@
 #include "iLEDasm.h"
 #include "iLEDwriteColor.h"
 
+// UART parameters for TimeLcd board
+#define FREQ    16000000UL
+#define BAUD    9600
+
 #define LCDaddy 0b0111100
 #define addressWrite (LCDaddy << 1) & 0b11111110
 #define commandControlByte 0x00
@@ -25,6 +29,23 @@
 #define DEBOUNCE_DELAY 50
 
 
+void uart_init(void) {
+    TRISBbits.TRISB7 = 1;   // U1RX as input
+    TRISBbits.TRISB6 = 0;   // U1TX as output
+    U1BRG = (unsigned int)((FREQ/(16UL*BAUD)) - 1);
+    U1MODEbits.UARTEN = 1;  // enable UART
+    U1STAbits.UTXEN  = 1;    // enable TX
+}
+
+void sendData(const char *s) {
+    while (*s) {
+        while (U1STAbits.UTXBF); 
+        U1TXREG = *s++;
+    }
+    // terminate line
+    while (U1STAbits.UTXBF); U1TXREG = '\r';
+    while (U1STAbits.UTXBF); U1TXREG = '\n';
+}
 
 void delay_ms(unsigned int ms) {
     while (ms-- > 0) {
