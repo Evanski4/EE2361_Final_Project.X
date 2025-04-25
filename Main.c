@@ -46,6 +46,19 @@ void sendData(const char *s) {
     while (U1STAbits.UTXBF); U1TXREG = '\r';
     while (U1STAbits.UTXBF); U1TXREG = '\n';
 }
+void readString(char *buffer, int maxLength) {
+    int i = 0;
+    char c;
+
+    do {
+        while (!U1STAbits.URXDA); // Wait for a new character
+        c = U1RXREG;              // Read received character
+        buffer[i++] = c;          // Store it in buffer
+    } while (c != '\n' && i < (maxLength - 1)); // Stop on newline or buffer full
+
+    buffer[i] = '\0'; // Null-terminate the string
+}
+
 
 void delay_ms(unsigned int ms) {
     while (ms-- > 0) {
@@ -214,8 +227,18 @@ void scrollText(const char *str, int delay_per_step, int repeatTime_ms) {
 int main(void) {
     setup();
     initLCD();
-    
+    char response[100];  // Buffer to hold incoming message
+    initUart(); 
+    // after we send a AT Command there should be a response we can check the response with readString function
     int randomColor;
+    //setup for the HC-05 aka master will have to have a different file to set up the slave 
+    sendData("AT+NAMEHC-05");
+    readString(response,sizeof(response));
+    //check response variable here when debugging should be okHC-05
+    sendData("AT+PE"); //sets even parity bit 
+    sendData("AT+ROLE=1");          // Set as master
+    sendData("AT+CMODE=0");         // Connect to specific address
+    sendData("AT+BIND=XXXX,YY,ZZZZZZ"); // Bind to HC-06?s MAC address this address will be found by using the sendData("AT+ADDR?");readString(response, sizeof(response)); on the HC-06 
     scrollText("Press to start", 250, 3000);
     waitForButtonPress();
 
