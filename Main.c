@@ -13,10 +13,10 @@
 #include <stdlib.h> // for rand
 #include "iLEDasm.h"
 #include "iLEDwriteColor.h"
-
+#include "bluetooth.h"
 // UART parameters for TimeLcd board
 #define FREQ    16000000UL
-#define BAUD    9600
+#define BAUD    38400
 
 #define LCDaddy 0b0111100
 #define addressWrite (LCDaddy << 1) & 0b11111110
@@ -29,35 +29,57 @@
 #define DEBOUNCE_DELAY 50
 
 
-void uart_init(void) {
-    TRISBbits.TRISB7 = 1;   // U1RX as input
-    TRISBbits.TRISB6 = 0;   // U1TX as output
-    U1BRG = (unsigned int)((FREQ/(16UL*BAUD)) - 1);
-    U1MODEbits.UARTEN = 1;  // enable UART
-    U1STAbits.UTXEN  = 1;    // enable TX
-}
+//void uart_init(void) {
+//    TRISBbits.TRISB7 = 1;   // U1RX as input
+//    TRISBbits.TRISB6 = 0;   // U1TX as output
+//    U1BRG = (unsigned int)((FREQ/(16UL*BAUD)) - 1);
+//    U1MODEbits.UARTEN = 1;  // enable UART
+//    U1STAbits.UTXEN  = 1;    // enable TX
+//}
 
-void sendData(const char *s) {
-    while (*s) {
-        while (U1STAbits.UTXBF); 
-        U1TXREG = *s++;
-    }
-    // terminate line
-    while (U1STAbits.UTXBF); U1TXREG = '\r';
-    while (U1STAbits.UTXBF); U1TXREG = '\n';
-}
+//void sendData(const char *s) {
+//    while (*s) {
+//        while (U1STAbits.UTXBF); 
+//        U1TXREG = *s++;
+//    }
+//    // terminate line
+//    while (U1STAbits.UTXBF); U1TXREG = '\r';
+//    while (U1STAbits.UTXBF); U1TXREG = '\n';
+//}
+//void readString(char *buffer, int maxLength) {
+//    int i = 0;
+//    char c;
+//
+//    do {
+//        while (!U1STAbits.URXDA); // Wait for a new character
+//        c = U1RXREG;              // Read received character
+//        buffer[i++] = c;          // Store it in buffer
+//    } while (c != '\n' && i < (maxLength - 1)); // Stop on newline or buffer full
+//
+//    buffer[i] = '\0'; // Null-terminate the string
+//}
 void readString(char *buffer, int maxLength) {
     int i = 0;
     char c;
+    int timeout = 0;
 
     do {
-        while (!U1STAbits.URXDA); // Wait for a new character
-        c = U1RXREG;              // Read received character
-        buffer[i++] = c;          // Store it in buffer
-    } while (c != '\n' && i < (maxLength - 1)); // Stop on newline or buffer full
+        timeout = 0;
+        while (!U1STAbits.URXDA) {
+            delay(1);     // Wait 1 millisecond
+            timeout++;
+            if (timeout > 1000) { // Timeout after 1000ms (1 second)
+                buffer[i] = '\0'; // Terminate string early
+                return;
+            }
+        }
+        c = U1RXREG;
+        buffer[i++] = c;
+    } while (c != '\n' && i < (maxLength - 1));
 
-    buffer[i] = '\0'; // Null-terminate the string
+    buffer[i] = '\0'; // Null terminate
 }
+
 
 
 void delay_ms(unsigned int ms) {
@@ -225,20 +247,35 @@ void scrollText(const char *str, int delay_per_step, int repeatTime_ms) {
     }
 }
 int main(void) {
+//    initUart();
+//    delay(1000);
+//
+//    // Try sending one simple character 'A'
+//    while (U1STAbits.UTXBF);  // Wait if TX buffer full
+//    U1TXREG = 'A';            // Load 'A' to transmit register
+//    while (U1STAbits.TRMT == 0); // Wait until transmission complete
+//
+//    while (1);
     setup();
     initLCD();
     char response[100];  // Buffer to hold incoming message
-    initUart(); 
+    initUart();
+    delay(5);
     // after we send a AT Command there should be a response we can check the response with readString function
     int randomColor;
     //setup for the HC-05 aka master will have to have a different file to set up the slave 
     sendData("AT+NAMEHC-05");
     readString(response,sizeof(response));
+    
     //check response variable here when debugging should be okHC-05
     sendData("AT+PE"); //sets even parity bit 
+    readString(response,sizeof(response));
     sendData("AT+ROLE=1");          // Set as master
+    readString(response,sizeof(response));
     sendData("AT+CMODE=0");         // Connect to specific address
+    readString(response,sizeof(response));
     sendData("AT+BIND=XXXX,YY,ZZZZZZ"); // Bind to HC-06?s MAC address this address will be found by using the sendData("AT+ADDR?");readString(response, sizeof(response)); on the HC-06 
+    readString(response,sizeof(response));
     scrollText("Press to start", 250, 3000);
     waitForButtonPress();
 
