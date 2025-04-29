@@ -1,34 +1,35 @@
 #include <xc.h>  // Include the default header for PIC24
 
 
-#define BAUD 9600      // Desired baud rate
-#define FREQ 16000000  // System clock (in Hz)
+#define BAUD   38400ul       
+#define FOSC   16000000ul
 
-void sendData(const char *str){
-    // Loop through each character in the string and send it
-    while (*str != '\0') {
-        while (U1STAbits.UTXBF);  // Wait until the transmit buffer is not full
-        U1TXREG = *str;           // Send the current character
-        str++;                    // Move to the next character in the string
-    }
+void initUart(void) {
+    TRISBbits.TRISB10 = 0;  // TX output
+    TRISBbits.TRISB11 = 1;  // RX input
 
-    // Send the carriage return and line feed after the command
-    while (U1STAbits.UTXBF);  // Wait until the transmit buffer is not full
-    U1TXREG = '\r';           // Send carriage return
-    while (U1STAbits.UTXBF);  // Wait until the transmit buffer is not full
-    U1TXREG = '\n';           // Send line feed
+    U1MODE = 0;
+    U1STA = 0;
+
+    RPOR5bits.RP10R = 3;    // Map U1TX to RP10 (RB10)
+    RPINR18bits.U1RXR = 11; // Map U1RX to RP11 (RB11)
+
+    U1MODEbits.BRGH = 0;
+    U1BRG = (FOSC / (16UL * BAUD)) - 1;
+
+    U1MODEbits.UARTEN = 1;  // Enable UART
+    U1STAbits.UTXEN = 1;    // Enable Transmit
 }
 
-void initUart(void){
-    // Configure U1TX as output, U1RX as input
-    TRISBbits.TRISB7 = 0;   // Set U1TX (Pin RB7) as output
-    TRISBbits.TRISB6 = 1;   // Set U1RX (Pin RB6) as input
-
-    // Set the baud rate
-    unsigned int baud_rate = (FREQ / (16 * BAUD)) - 1; // Formula for baud rate generator
-    U1BRG = baud_rate;  // Set the baud rate
-
-    // Enable UART1:
-    U1MODEbits.UARTEN = 1;    // Enable UART1 (UxMODE<15>)
-    U1STAbits.UTXEN = 1;      // Enable UART1 transmit (UxSTA<10>)
+// your sendData() can stay exactly the same
+void sendData(const char *str) {
+    while (*str) {
+        while (U1STAbits.UTXBF);  // wait if TX buffer is full
+        U1TXREG = *str++;
+    }
+    // append CR+LF
+    while (U1STAbits.UTXBF);
+    U1TXREG = '\r';
+    while (U1STAbits.UTXBF);
+    U1TXREG = '\n';
 }
