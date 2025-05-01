@@ -8,11 +8,11 @@
 #pragma config OSCIOFNC = ON
 #pragma config FCKSM = CSECME
 #pragma config FNOSC = FRCPLL
-
+#include <stdio.h>
 #include "xc.h"
 #include <stdlib.h> // for rand
 #include "iLEDasm.h"
-#include "iLEDwriteColorr.h"
+#include "iLEDwriteColor.h"
 // #include "bluetooth.h"   // <-- Bluetooth include removed
 
 #define FREQ    16000000UL
@@ -97,6 +97,7 @@ void write_color(int r, int g, int b) {
    
     ETO_wait_100us();
 }
+volatile unsigned long timerCounter = 0;
 
 void setup(void) {
     CLKDIVbits.RCDIV = 0;
@@ -117,13 +118,39 @@ void setup(void) {
     delay_ms(10);
     PORTBbits.RB6 = 1;
     delay_ms(1);
+    
+        //timer 1 setup 
+    T1CONbits.TON = 0;       // Disable timer
+    T1CONbits.TCS = 0;       // Internal clock (FOSC/2 = 8 MHz)
+    T1CONbits.TCKPS = 0b10;  // 1:64 prescaler (8 MHz / 64 = 125 kHz ? 8 µs/tick)
+    PR1 = 124;               // 125 ticks × 8 µs = 1.000 ms
+    TMR1 = 0;                // Reset timer
+    IEC0bits.T1IE = 1;       // Enable interrupt
+    IFS0bits.T1IF = 0;       // Clear flag
 }
+void __attribute__((__interrupt__, auto_psv)) _T1Interrupt(void) {
+    timerCounter++;         // Increment ms counter
+    IFS0bits.T1IF = 0;      // Clear interrupt flag
+}
+unsigned long int times [5];
 
+int i =0;
+int greenRound;
 void waitForButtonPress(void) {
+    timerCounter = 0;  // reset at start
+    TMR1=0;
+   if(greenRound)
+   { T1CONbits.TON = 1;
+   } // start Timer1
+
     while (BUTTON == 1);
     LATA = 0x0001;
     delay_ms(DEBOUNCE_DELAY);
-
+    unsigned long pressTime = timerCounter;
+    T1CONbits.TON = 0;
+    if(greenRound){
+        times[i++] = pressTime;
+    }
     while (BUTTON == 0);
     delay_ms(DEBOUNCE_DELAY);
     LATA = 0x0000;
@@ -180,6 +207,16 @@ void lcd_printChar(char myChar) {
 
     I2C1CONbits.PEN = 1;
     while(I2C1CONbits.PEN);
+}
+unsigned long getAvgTime(void){
+    unsigned long int sum = 0;
+    for (int i = 0; i < 5; i++) {
+        sum += times[i];
+    }
+
+
+
+    return sum / 5;
 }
 
 void lcd_printStr(const char *str) {
@@ -265,6 +302,7 @@ int main(void) {
                 writeColor(0, 0, 0);  // Turn off red light
             } else if (randomColor == 2) {
                 // GREEN light
+                greenRound = 1;
                 clear();
                 lcd_setCursor(0, 0);
 
@@ -280,6 +318,7 @@ int main(void) {
                 lcd_setCursor(1, 0);
 
                 greenRoundsCompleted++;  // Increment green round counter
+                greenRound=0;
             }
         }
 
@@ -287,7 +326,11 @@ int main(void) {
         lcd_setCursor(0, 0);
         lcd_printStr("All done!");
         delay_ms(3000);
-
+     lcd_setCursor(1,0);
+  char buffer[16];
+    unsigned long avg = getAvgTime();
+    sprintf(buffer, "%lu.%03lu", avg / 1000, avg % 1000); // seconds.milliseconds
+    lcd_printStr(buffer);
     restartGame:
         ;
     }
