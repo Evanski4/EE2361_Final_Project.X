@@ -1,8 +1,7 @@
-build/default/debug/Main.o: Main.c iLEDasm.h iLEDwriteColor.h \
- LCDlibrary.h
+build/default/debug/Main.o: Main.c iLEDasm.h iLEDwriteColor.h LCD.h
 
 iLEDasm.h:
 
 iLEDwriteColor.h:
 
-LCDlibrary.h:
+LCD.h:

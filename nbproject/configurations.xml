@@ -7,7 +7,7 @@
       <itemPath>iLEDwriteColor.h</itemPath>
       <itemPath>iLEDasm.h</itemPath>
       <itemPath>bluetooth.h</itemPath>
-      <itemPath>LCDlibrary.h</itemPath>
+      <itemPath>LCD.h</itemPath>
     </logicalFolder>
     <logicalFolder name="ExternalFiles"
                    displayName="Important Files"
@@ -39,7 +39,7 @@
         <targetDevice>PIC24FJ64GA002</targetDevice>
         <targetHeader></targetHeader>
         <targetPluginBoard></targetPluginBoard>
-        <platformTool>snap</platformTool>
+        <platformTool>noID</platformTool>
         <languageToolchain>XC16</languageToolchain>
         <languageToolchainVersion>2.10</languageToolchainVersion>
         <platform>3</platform>

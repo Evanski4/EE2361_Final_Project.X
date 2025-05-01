@@ -13,15 +13,7 @@
 // CW1: FLASH CONFIGURATION WORD 1 (see PIC24 Family Reference Manual 24.1)
 
 #define PERIOD 5 //Compiler constant
-//    void setup(void){
-//        // Execute once code goes here
-//    CLKDIVbits.RCDIV = 0;  //Set RCDIV=1:1 (default 2:1) 32MHz or FCY/2=16M
-//    AD1PCFG = 0x9fff;            //sets all pins to digital I/O
-//    TRISA = 0b1111111111111110;  //set port A to inputs,
-//    LATA = 0x0000;               //Set all of port A to HIGH
-//   
-//   
-//    }
+
      void delay(int delay_in_ms){
                 for(int i = 0; i<delay_in_ms;i++){
                     ETO_wait_1ms();
