@@ -7,6 +7,7 @@
       <itemPath>iLEDwriteColor.h</itemPath>
       <itemPath>iLEDasm.h</itemPath>
       <itemPath>bluetooth.h</itemPath>
+      <itemPath>LCDlibrary.h</itemPath>
     </logicalFolder>
     <logicalFolder name="ExternalFiles"
                    displayName="Important Files"
@@ -24,6 +25,7 @@
       <itemPath>iLEDasm.s</itemPath>
       <itemPath>iLEDwriteColor.c</itemPath>
       <itemPath>bluetooth.c</itemPath>
+      <itemPath>LCD.c</itemPath>
     </logicalFolder>
   </logicalFolder>
   <sourceRootList>

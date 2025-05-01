@@ -13,92 +13,42 @@
 #include <stdlib.h> // for rand
 #include "iLEDasm.h"
 #include "iLEDwriteColor.h"
+#include "LCDlibrary.h"
 // #include "bluetooth.h"   // <-- Bluetooth include removed
 
 #define FREQ    16000000UL
-#define BAUD    38400
 
-#define LCDaddy 0b0111100
-#define addressWrite (LCDaddy << 1) & 0b11111110
-#define commandControlByte 0x00
-#define dataControlByte 0x40
-#define dataStringControlByte 0xC0
-#define LCD_WIDTH 10
+
+
 
 #define BUTTON PORTBbits.RB7
 #define DEBOUNCE_DELAY 50
-
-/*
-void uart_init(void) {
-    TRISBbits.TRISB7 = 1;   // U1RX as input
-    TRISBbits.TRISB6 = 0;   // U1TX as output
-    U1BRG = (unsigned int)((FREQ/(16UL*BAUD)) - 1);
-    U1MODEbits.UARTEN = 1;  // enable UART
-    U1STAbits.UTXEN  = 1;    // enable TX
-}
-
-void sendData(const char *s) {
-    while (*s) {
-        while (U1STAbits.UTXBF); 
-        U1TXREG = *s++;
-    }
-    // terminate line
-    while (U1STAbits.UTXBF); U1TXREG = '\r';
-    while (U1STAbits.UTXBF); U1TXREG = '\n';
-}
-
-void readString(char *buffer, int maxLength) {
-    int i = 0;
-    char c;
-    int timeout = 0;
-
-    do {
-        timeout = 0;
-        while (!U1STAbits.URXDA) {
-            delay(1);     // Wait 1 millisecond
-            timeout++;
-            if (timeout > 1000) { // Timeout after 1000ms (1 second)
-                buffer[i] = '\0'; // Terminate string early
-                return;
-            }
-        }
-        c = U1RXREG;
-        buffer[i++] = c;
-    } while (c != '\n' && i < (maxLength - 1));
-
-    buffer[i] = '\0'; // Null terminate
-}
-*/
-
+/**
+ * @brief Simple delay function, pauses the program for a given number of milliseconds.
+ *
+ * Each millisecond delay is based on running some no-operation commands.
+ * The delay is tuned for a 16 MHz clock; it's approximate.
+ *
+ * @param ms Number of milliseconds to pause.
+ */
 void delay_ms(unsigned int ms) {
     while (ms-- > 0) {
         asm("repeat #15998");
         asm("nop");
     }
 }
-
-void write_color(int r, int g, int b) {
-    int i;
-    
-    for (i = 7; i >= 0; i--) {
-        if ((r & (1 << i)) > 0) write_1();    
-        else write_0();        
-    }
-   
-    for (i = 7; i >= 0; i--) {
-        if ((g & (1 << i)) > 0) write_1();          
-        else write_0();      
-    }  
-
-    for (i = 7; i >= 0; i--) {
-        if ((b & (1 << i)) > 0) write_1();    
-        else write_0();    
-    }  
-   
-    ETO_wait_100us();
-}
+//clock overflow counter
 volatile unsigned long timerCounter = 0;
-
+/**
+ * @brief Sets up my PIC24: clock, ports, I2C, and Timer1 interrupts.
+ *
+ * - System clock to full speed.
+ * - All pins digital (no analog).
+ * - RA0 output, RB7 input (button with pull-up), rest outputs.
+ * - I2C1 at about 100 kHz.
+ * - Quick reset sequence on RB6 for peripherals.
+ * - Timer1 set to trigger interrupts every 1 ms.
+ */
 void setup(void) {
     CLKDIVbits.RCDIV = 0;
     AD1PCFG = 0xFFFF;
@@ -128,14 +78,31 @@ void setup(void) {
     IEC0bits.T1IE = 1;       // Enable interrupt
     IFS0bits.T1IF = 0;       // Clear flag
 }
+/**
+ * @brief Timer1 interrupt, runs every 1 ms.
+ *
+ * Just increments my global millisecond counter (`timerCounter`) and resets the interrupt flag.
+ */
 void __attribute__((__interrupt__, auto_psv)) _T1Interrupt(void) {
     timerCounter++;         // Increment ms counter
     IFS0bits.T1IF = 0;      // Clear interrupt flag
 }
+//Array to store all the times it took to press the button on green rounds
 unsigned long int times [5];
-
+//Counter variable to show where to write in the times array
 int i =0;
+//variable is 1 if it is a green round 0 0 otherwise
 int greenRound;
+/**
+ * @brief Waits until the button is pressed, handles debounce, and records press duration if it's the "green" round.
+ * - Resets the timer counter at the start.
+ * - Starts Timer1 only if `greenRound` is active.
+ * - Waits (blocking) until button press is detected.
+ * - Turns on an indicator (LED) after the button press.
+ * - Records how long the button was pressed (using `timerCounter`) if `greenRound` is true.
+ * - Waits again until the button is released.
+ * - Turns off the indicator LED and handles debounce delays.
+ */
 void waitForButtonPress(void) {
     timerCounter = 0;  // reset at start
     TMR1=0;
@@ -156,105 +123,34 @@ void waitForButtonPress(void) {
     LATA = 0x0000;
 }
 
-void lcd_cmd(char package) {
-    I2C1CONbits.SEN = 1;
-    while(I2C1CONbits.SEN);
 
-    _MI2C1IF = 0;
-    I2C1TRN = addressWrite;
-    while(I2C1STATbits.TRSTAT && !_MI2C1IF);
-
-    _MI2C1IF = 0;
-    I2C1TRN = commandControlByte;
-    while(I2C1STATbits.TRSTAT && !_MI2C1IF);
-
-    _MI2C1IF = 0;
-    I2C1TRN = package;
-    while(I2C1STATbits.TRSTAT && !_MI2C1IF);
-
-    I2C1CONbits.PEN = 1;
-    while(I2C1CONbits.PEN);
-}
-
-void initLCD(void) {
-    lcd_cmd(0x3A); lcd_cmd(0x09); lcd_cmd(0x06);
-    lcd_cmd(0x1E); lcd_cmd(0x39); lcd_cmd(0x1B);
-    lcd_cmd(0x6E); lcd_cmd(0x56); lcd_cmd(0x7A);
-    lcd_cmd(0x38); lcd_cmd(0x0F); lcd_cmd(0x3A);
-    lcd_cmd(0x09); lcd_cmd(0x1A); lcd_cmd(0x3C);
-    lcd_cmd(0x01);
-}
-
-void lcd_setCursor(char x, char y) {
-    lcd_cmd(((0x20)*x+y) | 0x80);
-}
-
-void lcd_printChar(char myChar) {
-    I2C1CONbits.SEN = 1;
-    while(I2C1CONbits.SEN);
-
-    _MI2C1IF = 0;
-    I2C1TRN = addressWrite;
-    while(I2C1STATbits.TRSTAT && !_MI2C1IF);
-
-    _MI2C1IF = 0;
-    I2C1TRN = dataControlByte;
-    while(I2C1STATbits.TRSTAT && !_MI2C1IF);
-
-    _MI2C1IF = 0;
-    I2C1TRN = myChar;
-    while(I2C1STATbits.TRSTAT && !_MI2C1IF);
-
-    I2C1CONbits.PEN = 1;
-    while(I2C1CONbits.PEN);
-}
+/**
+ * @brief Returns the average of the first 5 values in the `times` array.
+ *
+ * Adds up the first 5 times and divides by 5 to get the average.
+ * Assumes all 5 values in the array are already filled in.
+ *
+ * @return The average time as an unsigned long.
+ */
 unsigned long getAvgTime(void){
     unsigned long int sum = 0;
     for (int i = 0; i < 5; i++) {
         sum += times[i];
     }
-
-
-
     return sum / 5;
 }
 
-void lcd_printStr(const char *str) {
-    while(*str != '\0') {
-        lcd_printChar(*str++);
-    }
-}
-
-void clear(void) {
-    lcd_cmd(0x01);
-}
-
-void scrollText(const char *str, int delay_per_step, int repeatTime_ms) {
-    int len = 0;
-    while (str[len] != '\0') len++;
-
-    int totalSteps = repeatTime_ms / delay_per_step;
-    int col = LCD_WIDTH;
-
-    for (int s = 0; s < totalSteps; s++) {
-        lcd_setCursor(0, 0);
-        for (int i = 0; i < LCD_WIDTH; i++) lcd_printChar(' ');
-
-        lcd_setCursor(0, col >= 0 ? col : 0);
-        for (int i = 0; i < len; i++) {
-            int pos = col + i;
-            if (pos >= 0 && pos < LCD_WIDTH) {
-                lcd_printChar(str[i]);
-            }
-        }
-
-        col--;
-        if (col < -len) col = LCD_WIDTH;
-
-        delay_ms(delay_per_step);
-    }
-}
-
+/**
+ * @brief Main game loop: reaction time test using RGB LED, LCD, and button.
+ *
+ * Here's what it does:
+ * - Waits for the player to press a button to start.
+ * - Randomly shows either a red or green light.
+ *   - If it's red and you press the button, you lose.
+ *   - If it's green, you need to press the button as fast as you can.
+ * - Repeats this until you've correctly responded to 5 green lights.
+ * - At the end, it shows your average reaction time on the LCD.
+ */
 int main(void) {
     while (1) {  
         setup();

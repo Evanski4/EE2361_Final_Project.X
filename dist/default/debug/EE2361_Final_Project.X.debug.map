@@ -4,11 +4,11 @@ Tool Name:
   c:\program files\microchip\xc16\v2.10\bin\bin\..\bin/elf-ld.exe
 
 Command:
-  -TC:\\Users\\madpe\\AppData\\Local\\Temp\\tmp00004e24.00 \
-  -TC:\\Users\\madpe\\AppData\\Local\\Temp\\tmp00004e24.01 \
-  -TC:\\Users\\madpe\\AppData\\Local\\Temp\\tmp00004e24.02 \
-  -TC:\\Users\\madpe\\AppData\\Local\\Temp\\tmp00004e24.03 \
-  -TC:\\Users\\madpe\\AppData\\Local\\Temp\\tmp00004e24.04 \
+  -TC:\\Users\\madpe\\AppData\\Local\\Temp\\tmp00007878.00 \
+  -TC:\\Users\\madpe\\AppData\\Local\\Temp\\tmp00007878.01 \
+  -TC:\\Users\\madpe\\AppData\\Local\\Temp\\tmp00007878.02 \
+  -TC:\\Users\\madpe\\AppData\\Local\\Temp\\tmp00007878.03 \
+  -TC:\\Users\\madpe\\AppData\\Local\\Temp\\tmp00007878.04 \
   -p24FJ64GA002 \
   --mdfp=C:/Users/madpe/.mchp_packs/Microchip/PIC24F-GA-GB_DFP/1.10.375/xc16 \
   -o \
@@ -27,6 +27,7 @@ Command:
   build/default/debug/iLEDasm.o \
   build/default/debug/iLEDwriteColor.o \
   build/default/debug/bluetooth.o \
+  build/default/debug/LCD.o \
   --defsym=__MPLAB_BUILD=1 \
   --defsym=__MPLAB_DEBUG=1 \
   --defsym=__DEBUG=1 \
@@ -130,11 +131,11 @@ section                    address   length (PC units)   length (bytes) (dec)
 -------                    -------   -----------------   --------------------
 .text                        0x200               0xea4          0x15f6  (5622)
 .const                      0x10a4                0x5a            0x87  (135)
-.text                       0x10fe               0x692           0x9db  (2523)
-.dinit                      0x1790                0x34            0x4e  (78)
-.text                       0x17c4                0x28            0x3c  (60)
+.text                       0x10fe               0x61a           0x927  (2343)
+.dinit                      0x1718                0x34            0x4e  (78)
+.text                       0x174c                0x28            0x3c  (60)
 
-                 Total "program" memory used (bytes):         0x20e2  (8418) 12%
+                 Total "program" memory used (bytes):         0x202e  (8238) 12%
 
 
 "data" Memory  [Origin = 0x800, Length = 0x2000]
@@ -228,36 +229,35 @@ External Symbols in Program Memory (by address):
                   0x000fe8                  ___divdi3
                   0x001048                  ___moddi3
                   0x0010fe                  _delay_ms
-                  0x00111e                  _write_color
-                  0x001192                  _setup
-                  0x0011e6                  _waitForButtonPress
-                  0x001242                  _lcd_cmd
-                  0x0012ae                  _initLCD
-                  0x0012f4                  _lcd_setCursor
-                  0x00130a                  _lcd_printChar
-                  0x001378                  _getAvgTime
-                  0x0013aa                  _lcd_printStr
-                  0x0013c4                  _clear
-                  0x0013ce                  _scrollText
-                  0x001484                  _main
-                  0x0015c6                  _delay
-                  0x0015e0                  _writeColor
-                  0x001654                  _gradient
-                  0x0016aa                  _getR
-                  0x0016c2                  _getG
-                  0x0016e0                  _getB
-                  0x0016f4                  _writePacCol
-                  0x00171c                  _initUart
-                  0x001748                  _sendData
-                  0x0017c4                  _ETO_wait_100us
-                  0x0017ca                  _ETO_wait_1ms
-                  0x0017d0                  _write_0
-                  0x0017de                  _write_1
+                  0x00111e                  _setup
+                  0x00116e                  _waitForButtonPress
+                  0x0011ca                  _getAvgTime
+                  0x0011fc                  _main
+                  0x00133e                  _lcd_cmd
+                  0x0013aa                  _initLCD
+                  0x0013f0                  _lcd_setCursor
+                  0x001406                  _lcd_printChar
+                  0x001474                  _clear
+                  0x00147e                  _lcd_printStr
+                  0x001498                  _scrollText
+                  0x00154e                  _delay
+                  0x001568                  _writeColor
+                  0x0015dc                  _gradient
+                  0x001632                  _getR
+                  0x00164a                  _getG
+                  0x001668                  _getB
+                  0x00167c                  _writePacCol
+                  0x0016a4                  _initUart
+                  0x0016d0                  _sendData
+                  0x00174c                  _ETO_wait_100us
+                  0x001752                  _ETO_wait_1ms
+                  0x001758                  _write_0
+                  0x001766                  _write_1
 
 External Symbols in Program Memory (by name):
 
-                  0x0017c4                  _ETO_wait_100us
-                  0x0017ca                  _ETO_wait_1ms
+                  0x00174c                  _ETO_wait_100us
+                  0x001752                  _ETO_wait_1ms
                   0x0002e8                  __DefaultInterrupt
                   0x0002c8                  __T1Interrupt
                   0x0004c0                  ___cvt_u
@@ -295,37 +295,36 @@ External Symbols in Program Memory (by name):
                   0x00023c                  __psv_init
                   0x000200                  __resetPRI
                   0x000c1a                  _atoi
-                  0x0013c4                  _clear
-                  0x0015c6                  _delay
+                  0x001474                  _clear
+                  0x00154e                  _delay
                   0x0010fe                  _delay_ms
-                  0x001378                  _getAvgTime
-                  0x0016e0                  _getB
-                  0x0016c2                  _getG
-                  0x0016aa                  _getR
-                  0x001654                  _gradient
-                  0x0012ae                  _initLCD
-                  0x00171c                  _initUart
-                  0x001242                  _lcd_cmd
-                  0x00130a                  _lcd_printChar
-                  0x0013aa                  _lcd_printStr
-                  0x0012f4                  _lcd_setCursor
-                  0x001484                  _main
+                  0x0011ca                  _getAvgTime
+                  0x001668                  _getB
+                  0x00164a                  _getG
+                  0x001632                  _getR
+                  0x0015dc                  _gradient
+                  0x0013aa                  _initLCD
+                  0x0016a4                  _initUart
+                  0x00133e                  _lcd_cmd
+                  0x001406                  _lcd_printChar
+                  0x00147e                  _lcd_printStr
+                  0x0013f0                  _lcd_setCursor
+                  0x0011fc                  _main
                   0x000c66                  _memcpy
                   0x000c74                  _memset
                   0x000338                  _rand
-                  0x0013ce                  _scrollText
-                  0x001748                  _sendData
-                  0x001192                  _setup
+                  0x001498                  _scrollText
+                  0x0016d0                  _sendData
+                  0x00111e                  _setup
                   0x00032e                  _srand
                   0x000d3c                  _strlen
                   0x000d6c                  _tolower
                   0x000d7a                  _toupper
-                  0x0011e6                  _waitForButtonPress
-                  0x0015e0                  _writeColor
-                  0x0016f4                  _writePacCol
-                  0x0017d0                  _write_0
-                  0x0017de                  _write_1
-                  0x00111e                  _write_color
+                  0x00116e                  _waitForButtonPress
+                  0x001568                  _writeColor
+                  0x00167c                  _writePacCol
+                  0x001758                  _write_0
+                  0x001766                  _write_1
 
 Memory Configuration
 
@@ -371,6 +370,7 @@ LOAD build/default/debug/Main.o
 LOAD build/default/debug/iLEDasm.o
 LOAD build/default/debug/iLEDwriteColor.o
 LOAD build/default/debug/bluetooth.o
+LOAD build/default/debug/LCD.o
                     0x0001                  __MPLAB_BUILD = 0x1
                     0x0001                  __MPLAB_DEBUG = 0x1
                     0x0001                  __DEBUG = 0x1
@@ -554,54 +554,59 @@ __CONFIG1
 .comment
  *(.comment)
 
-.debug_info       0x000000       0x23aa
+.debug_info       0x000000       0x2633
  *(.debug_info)
- .debug_info      0x000000       0x12af build/default/debug/Main.o
- .debug_info      0x0012af         0x91 build/default/debug/iLEDasm.o
- .debug_info      0x001340        0x373 build/default/debug/iLEDwriteColor.o
- .debug_info      0x0016b3        0xa34 build/default/debug/bluetooth.o
- .debug_info      0x0020e7         0x8d c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-pic30-elf.a(udivsi3.XX_o)
- .debug_info      0x002174         0x8d c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-pic30-elf.a(umodsi3.XX_o)
- .debug_info      0x002201         0x90 c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-pic30-elf.a(extendsfdf.XX_o)
- .debug_info      0x002291         0x8d c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-pic30-elf.a(funpack.XX_o)
- .debug_info      0x00231e         0x8c c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-pic30-elf.a(mulsi3.XX_o)
+ .debug_info      0x000000        0xd69 build/default/debug/Main.o
+ .debug_info      0x000d69         0x91 build/default/debug/iLEDasm.o
+ .debug_info      0x000dfa        0x373 build/default/debug/iLEDwriteColor.o
+ .debug_info      0x00116d        0xa34 build/default/debug/bluetooth.o
+ .debug_info      0x001ba1        0x7cf build/default/debug/LCD.o
+ .debug_info      0x002370         0x8d c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-pic30-elf.a(udivsi3.XX_o)
+ .debug_info      0x0023fd         0x8d c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-pic30-elf.a(umodsi3.XX_o)
+ .debug_info      0x00248a         0x90 c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-pic30-elf.a(extendsfdf.XX_o)
+ .debug_info      0x00251a         0x8d c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-pic30-elf.a(funpack.XX_o)
+ .debug_info      0x0025a7         0x8c c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-pic30-elf.a(mulsi3.XX_o)
  *(.gnu.linkonce.wi.*)
 
-.debug_abbrev     0x000000        0x41a
+.debug_abbrev     0x000000        0x531
  *(.debug_abbrev)
- .debug_abbrev    0x000000        0x1e6 build/default/debug/Main.o
- .debug_abbrev    0x0001e6         0x14 build/default/debug/iLEDasm.o
- .debug_abbrev    0x0001fa         0xc1 build/default/debug/iLEDwriteColor.o
- .debug_abbrev    0x0002bb         0xfb build/default/debug/bluetooth.o
- .debug_abbrev    0x0003b6         0x14 c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-pic30-elf.a(udivsi3.XX_o)
- .debug_abbrev    0x0003ca         0x14 c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-pic30-elf.a(umodsi3.XX_o)
- .debug_abbrev    0x0003de         0x14 c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-pic30-elf.a(extendsfdf.XX_o)
- .debug_abbrev    0x0003f2         0x14 c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-pic30-elf.a(funpack.XX_o)
- .debug_abbrev    0x000406         0x14 c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-pic30-elf.a(mulsi3.XX_o)
+ .debug_abbrev    0x000000        0x1a3 build/default/debug/Main.o
+ .debug_abbrev    0x0001a3         0x14 build/default/debug/iLEDasm.o
+ .debug_abbrev    0x0001b7         0xc1 build/default/debug/iLEDwriteColor.o
+ .debug_abbrev    0x000278         0xfb build/default/debug/bluetooth.o
+ .debug_abbrev    0x000373        0x15a build/default/debug/LCD.o
+ .debug_abbrev    0x0004cd         0x14 c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-pic30-elf.a(udivsi3.XX_o)
+ .debug_abbrev    0x0004e1         0x14 c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-pic30-elf.a(umodsi3.XX_o)
+ .debug_abbrev    0x0004f5         0x14 c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-pic30-elf.a(extendsfdf.XX_o)
+ .debug_abbrev    0x000509         0x14 c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-pic30-elf.a(funpack.XX_o)
+ .debug_abbrev    0x00051d         0x14 c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-pic30-elf.a(mulsi3.XX_o)
 
-.debug_line       0x000000        0x559
+.debug_line       0x000000        0x642
  *(.debug_line)
- .debug_line      0x000000        0x1e4 build/default/debug/Main.o
- .debug_line      0x0001e4         0x49 build/default/debug/iLEDasm.o
- .debug_line      0x00022d         0xca build/default/debug/iLEDwriteColor.o
- .debug_line      0x0002f7        0x108 build/default/debug/bluetooth.o
- .debug_line      0x0003ff         0x45 c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-pic30-elf.a(udivsi3.XX_o)
- .debug_line      0x000444         0x38 c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-pic30-elf.a(umodsi3.XX_o)
- .debug_line      0x00047c         0x59 c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-pic30-elf.a(extendsfdf.XX_o)
- .debug_line      0x0004d5         0x4a c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-pic30-elf.a(funpack.XX_o)
- .debug_line      0x00051f         0x3a c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-pic30-elf.a(mulsi3.XX_o)
+ .debug_line      0x000000        0x188 build/default/debug/Main.o
+ .debug_line      0x000188         0x49 build/default/debug/iLEDasm.o
+ .debug_line      0x0001d1         0xca build/default/debug/iLEDwriteColor.o
+ .debug_line      0x00029b        0x108 build/default/debug/bluetooth.o
+ .debug_line      0x0003a3        0x145 build/default/debug/LCD.o
+ .debug_line      0x0004e8         0x45 c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-pic30-elf.a(udivsi3.XX_o)
+ .debug_line      0x00052d         0x38 c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-pic30-elf.a(umodsi3.XX_o)
+ .debug_line      0x000565         0x59 c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-pic30-elf.a(extendsfdf.XX_o)
+ .debug_line      0x0005be         0x4a c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-pic30-elf.a(funpack.XX_o)
+ .debug_line      0x000608         0x3a c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-pic30-elf.a(mulsi3.XX_o)
 
-.debug_frame      0x000000        0x2c0
+.debug_frame      0x000000        0x2ba
  *(.debug_frame)
- .debug_frame     0x000000        0x1a6 build/default/debug/Main.o
- .debug_frame     0x0001a6         0xd2 build/default/debug/iLEDwriteColor.o
- .debug_frame     0x000278         0x48 build/default/debug/bluetooth.o
+ .debug_frame     0x000000         0xd6 build/default/debug/Main.o
+ .debug_frame     0x0000d6         0xd2 build/default/debug/iLEDwriteColor.o
+ .debug_frame     0x0001a8         0x48 build/default/debug/bluetooth.o
+ .debug_frame     0x0001f0         0xca build/default/debug/LCD.o
 
-.debug_str        0x000000         0xbd
+.debug_str        0x000000         0xc9
  *(.debug_str)
- .debug_str       0x000000         0x75 build/default/debug/Main.o
- .debug_str       0x000075         0x13 build/default/debug/iLEDwriteColor.o
- .debug_str       0x000088         0x35 build/default/debug/bluetooth.o
+ .debug_str       0x000000         0x5f build/default/debug/Main.o
+ .debug_str       0x00005f         0x13 build/default/debug/iLEDwriteColor.o
+ .debug_str       0x000072         0x35 build/default/debug/bluetooth.o
+ .debug_str       0x0000a7         0x22 build/default/debug/LCD.o
 
 .debug_loc
  *(.debug_loc)
@@ -610,19 +615,21 @@ __CONFIG1
  *(.debug_macinfo)
 
 .debug_pubnames
-                  0x000000        0x19e
+                  0x000000        0x1a0
  *(.debug_pubnames)
  .debug_pubnames
-                  0x000000        0x10f build/default/debug/Main.o
+                  0x000000         0x99 build/default/debug/Main.o
  .debug_pubnames
-                  0x00010f         0x63 build/default/debug/iLEDwriteColor.o
+                  0x000099         0x63 build/default/debug/iLEDwriteColor.o
  .debug_pubnames
-                  0x000172         0x2c build/default/debug/bluetooth.o
+                  0x0000fc         0x2c build/default/debug/bluetooth.o
+ .debug_pubnames
+                  0x000128         0x78 build/default/debug/LCD.o
 
 .debug_ranges
  *(.debug_ranges)
 
-.debug_aranges    0x000000        0x108
+.debug_aranges    0x000000        0x120
  *(.debug_aranges)
  .debug_aranges
                   0x000000         0x18 build/default/debug/Main.o
@@ -633,15 +640,17 @@ __CONFIG1
  .debug_aranges
                   0x000050         0x18 build/default/debug/bluetooth.o
  .debug_aranges
-                  0x000068         0x20 c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-pic30-elf.a(udivsi3.XX_o)
+                  0x000068         0x18 build/default/debug/LCD.o
  .debug_aranges
-                  0x000088         0x20 c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-pic30-elf.a(umodsi3.XX_o)
+                  0x000080         0x20 c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-pic30-elf.a(udivsi3.XX_o)
  .debug_aranges
-                  0x0000a8         0x20 c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-pic30-elf.a(extendsfdf.XX_o)
+                  0x0000a0         0x20 c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-pic30-elf.a(umodsi3.XX_o)
  .debug_aranges
-                  0x0000c8         0x20 c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-pic30-elf.a(funpack.XX_o)
+                  0x0000c0         0x20 c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-pic30-elf.a(extendsfdf.XX_o)
  .debug_aranges
-                  0x0000e8         0x20 c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-pic30-elf.a(mulsi3.XX_o)
+                  0x0000e0         0x20 c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-pic30-elf.a(funpack.XX_o)
+ .debug_aranges
+                  0x000100         0x20 c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-pic30-elf.a(mulsi3.XX_o)
                     0x0000                  WREG0 = 0x0
                     0x0000                  _WREG0 = 0x0
                     0x0002                  WREG1 = 0x2
@@ -1231,80 +1240,84 @@ LOAD default_isr
 LOAD data_init
 
 .debug_pubtypes
-                  0x000108        0x21b
+                  0x000120        0x25d
  .debug_pubtypes
-                  0x000108        0x13c build/default/debug/Main.o
+                  0x000120         0xfa build/default/debug/Main.o
  .debug_pubtypes
-                  0x000244         0x1f build/default/debug/iLEDwriteColor.o
+                  0x00021a         0x1f build/default/debug/iLEDwriteColor.o
  .debug_pubtypes
-                  0x000263         0xc0 build/default/debug/bluetooth.o
+                  0x000239         0xc0 build/default/debug/bluetooth.o
+ .debug_pubtypes
+                  0x0002f9         0x84 build/default/debug/LCD.o
 
 __c30_signature
-                  0x000323         0xc0
+                  0x00037d         0xc6
  __c30_signature
-                  0x000323          0x6 build/default/debug/Main.o
+                  0x00037d          0x6 build/default/debug/Main.o
  __c30_signature
-                  0x000329          0x6 build/default/debug/iLEDwriteColor.o
+                  0x000383          0x6 build/default/debug/iLEDwriteColor.o
  __c30_signature
-                  0x00032f          0x6 build/default/debug/bluetooth.o
+                  0x000389          0x6 build/default/debug/bluetooth.o
  __c30_signature
-                  0x000335          0x6 c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-pic30-elf.a(crt0_standard.o)
+                  0x00038f          0x6 build/default/debug/LCD.o
  __c30_signature
-                  0x00033b          0x6 c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-pic30-elf.a(data_init_standard.o)
+                  0x000395          0x6 c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-pic30-elf.a(crt0_standard.o)
  __c30_signature
-                  0x000341          0x6 c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-pic30-elf.a(udivsi3.XX_o)
+                  0x00039b          0x6 c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-pic30-elf.a(data_init_standard.o)
  __c30_signature
-                  0x000347          0x6 c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-pic30-elf.a(umodsi3.XX_o)
+                  0x0003a1          0x6 c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-pic30-elf.a(udivsi3.XX_o)
  __c30_signature
-                  0x00034d          0x6 c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-elf.a(__sio_sprintf_doux.XX_o)
+                  0x0003a7          0x6 c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-pic30-elf.a(umodsi3.XX_o)
  __c30_signature
-                  0x000353          0x6 c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-elf.a(rand.XX_o)
+                  0x0003ad          0x6 c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-elf.a(__sio_sprintf_doux.XX_o)
  __c30_signature
-                  0x000359          0x6 c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-elf.a(__fmt_d.XX_o)
+                  0x0003b3          0x6 c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-elf.a(rand.XX_o)
  __c30_signature
-                  0x00035f          0x6 c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-elf.a(__fmt_o.XX_o)
+                  0x0003b9          0x6 c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-elf.a(__fmt_d.XX_o)
  __c30_signature
-                  0x000365          0x6 c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-elf.a(__fmt_s.XX_o)
+                  0x0003bf          0x6 c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-elf.a(__fmt_o.XX_o)
  __c30_signature
-                  0x00036b          0x6 c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-elf.a(__fmt_u.XX_o)
+                  0x0003c5          0x6 c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-elf.a(__fmt_s.XX_o)
  __c30_signature
-                  0x000371          0x6 c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-elf.a(__fmt_x.XX_o)
+                  0x0003cb          0x6 c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-elf.a(__fmt_u.XX_o)
  __c30_signature
-                  0x000377          0x6 c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-elf.a(__int_vsprintf.XX_o)
+                  0x0003d1          0x6 c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-elf.a(__fmt_x.XX_o)
  __c30_signature
-                  0x00037d          0x6 c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-elf.a(__pop_int.XX_o)
+                  0x0003d7          0x6 c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-elf.a(__int_vsprintf.XX_o)
  __c30_signature
-                  0x000383          0x6 c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-elf.a(__pop_ptr.XX_o)
+                  0x0003dd          0x6 c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-elf.a(__pop_int.XX_o)
  __c30_signature
-                  0x000389          0x6 c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-elf.a(__printf_core.XX_o)
+                  0x0003e3          0x6 c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-elf.a(__pop_ptr.XX_o)
  __c30_signature
-                  0x00038f          0x6 c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-elf.a(atoi.XX_o)
+                  0x0003e9          0x6 c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-elf.a(__printf_core.XX_o)
  __c30_signature
-                  0x000395          0x6 c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-elf.a(memcpy.XX_o)
+                  0x0003ef          0x6 c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-elf.a(atoi.XX_o)
  __c30_signature
-                  0x00039b          0x6 c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-elf.a(memset.XX_o)
+                  0x0003f5          0x6 c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-elf.a(memcpy.XX_o)
  __c30_signature
-                  0x0003a1          0x6 c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-elf.a(strlen.XX_o)
+                  0x0003fb          0x6 c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-elf.a(memset.XX_o)
  __c30_signature
-                  0x0003a7          0x6 c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-elf.a(tolower.XX_o)
+                  0x000401          0x6 c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-elf.a(strlen.XX_o)
  __c30_signature
-                  0x0003ad          0x6 c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-elf.a(toupper.XX_o)
+                  0x000407          0x6 c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-elf.a(tolower.XX_o)
  __c30_signature
-                  0x0003b3          0x6 c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-elf.a(__errno_location.XX_o)
+                  0x00040d          0x6 c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-elf.a(toupper.XX_o)
  __c30_signature
-                  0x0003b9          0x6 c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-elf.a(__int_vsnprintf.XX_o)
+                  0x000413          0x6 c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-elf.a(__errno_location.XX_o)
  __c30_signature
-                  0x0003bf          0x6 c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-elf.a(__pop_float.XX_o)
+                  0x000419          0x6 c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-elf.a(__int_vsnprintf.XX_o)
  __c30_signature
-                  0x0003c5          0x6 c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-elf.a(__int_vfprintf.XX_o)
+                  0x00041f          0x6 c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-elf.a(__pop_float.XX_o)
  __c30_signature
-                  0x0003cb          0x6 c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-pic30-elf.a(extendsfdf.XX_o)
+                  0x000425          0x6 c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-elf.a(__int_vfprintf.XX_o)
  __c30_signature
-                  0x0003d1          0x6 c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-pic30-elf.a(funpack.XX_o)
+                  0x00042b          0x6 c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-pic30-elf.a(extendsfdf.XX_o)
  __c30_signature
-                  0x0003d7          0x6 c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-pic30-elf.a(mulsi3.XX_o)
+                  0x000431          0x6 c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-pic30-elf.a(funpack.XX_o)
  __c30_signature
-                  0x0003dd          0x6 c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-pic30-elf.a(divmoddi3.XX_o)
+                  0x000437          0x6 c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-pic30-elf.a(mulsi3.XX_o)
+ __c30_signature
+                  0x00043d          0x6 c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-pic30-elf.a(divmoddi3.XX_o)
 
 .nbss               0x0850          0x8
  .nbss              0x0850          0x8 build/default/debug/Main.o
@@ -1337,39 +1350,39 @@ __c30_signature
 .const              0x90a4         0x5a load address 0x0010a4  
  .const             0x90a4         0x5a build/default/debug/Main.o
 
-.text             0x0010fe        0x692
- .text            0x0010fe        0x4c8 build/default/debug/Main.o
+.text             0x0010fe        0x61a
+ .text            0x0010fe        0x240 build/default/debug/Main.o
                   0x0010fe                  _delay_ms
-                  0x00111e                  _write_color
-                  0x001192                  _setup
-                  0x0011e6                  _waitForButtonPress
-                  0x001242                  _lcd_cmd
-                  0x0012ae                  _initLCD
-                  0x0012f4                  _lcd_setCursor
-                  0x00130a                  _lcd_printChar
-                  0x001378                  _getAvgTime
-                  0x0013aa                  _lcd_printStr
-                  0x0013c4                  _clear
-                  0x0013ce                  _scrollText
-                  0x001484                  _main
- .text            0x0015c6        0x156 build/default/debug/iLEDwriteColor.o
-                  0x0015c6                  _delay
-                  0x0015e0                  _writeColor
-                  0x001654                  _gradient
-                  0x0016aa                  _getR
-                  0x0016c2                  _getG
-                  0x0016e0                  _getB
-                  0x0016f4                  _writePacCol
- .text            0x00171c         0x74 build/default/debug/bluetooth.o
-                  0x00171c                  _initUart
-                  0x001748                  _sendData
+                  0x00111e                  _setup
+                  0x00116e                  _waitForButtonPress
+                  0x0011ca                  _getAvgTime
+                  0x0011fc                  _main
+ .text            0x00133e        0x210 build/default/debug/LCD.o
+                  0x00133e                  _lcd_cmd
+                  0x0013aa                  _initLCD
+                  0x0013f0                  _lcd_setCursor
+                  0x001406                  _lcd_printChar
+                  0x001474                  _clear
+                  0x00147e                  _lcd_printStr
+                  0x001498                  _scrollText
+ .text            0x00154e        0x156 build/default/debug/iLEDwriteColor.o
+                  0x00154e                  _delay
+                  0x001568                  _writeColor
+                  0x0015dc                  _gradient
+                  0x001632                  _getR
+                  0x00164a                  _getG
+                  0x001668                  _getB
+                  0x00167c                  _writePacCol
+ .text            0x0016a4         0x74 build/default/debug/bluetooth.o
+                  0x0016a4                  _initUart
+                  0x0016d0                  _sendData
 
-.dinit            0x001790         0x34
- .dinit           0x001790         0x34 data_init
+.dinit            0x001718         0x34
+ .dinit           0x001718         0x34 data_init
 
-.text             0x0017c4         0x28
- .text            0x0017c4         0x28 build/default/debug/iLEDasm.o
-                  0x0017c4                  _ETO_wait_100us
-                  0x0017ca                  _ETO_wait_1ms
-                  0x0017d0                  _write_0
-                  0x0017de                  _write_1
+.text             0x00174c         0x28
+ .text            0x00174c         0x28 build/default/debug/iLEDasm.o
+                  0x00174c                  _ETO_wait_100us
+                  0x001752                  _ETO_wait_1ms
+                  0x001758                  _write_0
+                  0x001766                  _write_1
