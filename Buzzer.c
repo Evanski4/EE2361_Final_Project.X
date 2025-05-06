@@ -1,13 +1,37 @@
 #define FCY 16000000UL
 #define DESIRED_FREQ 150  // 2kHz tone
 #include "xc.h"
+int wompActive = 0;
+int wompTimer = 0;
+int wompState = 0;
+int wompBeepCount = 0;
+
+/**
+ * @brief Turns the buzzer off by disabling the PWM output.
+ *
+ * Sets the OC1 output mode to 0 (off), which stops the buzzer signal.
+ * Used to silence the buzzer after it's been on.
+ */
 void buzzerOFF(void) {
     OC1CONbits.OCM = 0b000;  
 }
-
+/**
+ * @brief Turns the buzzer off by disabling the PWM output.
+ *
+ * Sets the OC1 output mode to 0110 (on), which starts the buzzer signal.
+ * Used to start the buzzer after it's been off.
+ */
 void buzzerON(void) {
     OC1CONbits.OCM = 0b0110;  
 }
+/**
+ * @brief Sets up PWM on OC1 using Timer2 for buzzer control.
+ *
+ * - Configures RB2 (RP2) as the output pin for OC1.
+ * - Sets up Timer2 to generate a PWM frequency (default: 2kHz).
+ * - Initializes OC1 in edge-aligned PWM mode with 50% duty cycle.
+ * - Starts Timer2 and disables the buzzer output initially.
+ */
 void PWM_OC1_Init(void) {
     // Set RB2 (RP2) as output for OC1
     TRISBbits.TRISB2 = 0;
@@ -30,8 +54,14 @@ void PWM_OC1_Init(void) {
     buzzerOFF();
    
 }
-//
-//void set_tone(int)
+/**
+ * @brief Handles the "womp womp" beep pattern for the buzzer.
+ *
+ * This function should be called repeatedly (ideally in a loop).
+ * It turns the buzzer on and off every 500 ms to make 10 beeps total.
+ * When the timer hits zero, it toggles the buzzer state and updates the count.
+ * After 10 beeps, it stops everything and turns the buzzer off.
+ */
 
 void updateWompwomp(void) {
     if (wompActive) {

@@ -14,18 +14,12 @@
 #include "iLEDasm.h"
 #include "iLEDwriteColor.h"
 #include "LCD.h"
-
+#include "Buzzer.h"
 // #include "bluetooth.h"   // <-- Bluetooth include removed
 
 #define FREQ    16000000UL
 
-#define FCY 16000000UL
-#define DESIRED_FREQ 150  // 2kHz tone
 
-int wompActive = 0;
-int wompTimer = 0;
-int wompState = 0;  // 0 = off, 1 = on
-int wompBeepCount = 0;
 
 
 #define BUTTON PORTBbits.RB7
@@ -84,59 +78,6 @@ void setup(void) {
     TMR1 = 0;                // Reset timer
     IEC0bits.T1IE = 1;       // Enable interrupt
     IFS0bits.T1IF = 0;       // Clear flag
-}
-void PWM_OC1_Init(void) {
-    // Set RB2 (RP2) as output for OC1
-    TRISBbits.TRISB2 = 0;
-    RPOR1bits.RP2R = 18; // RP2 = OC1
-
-    // Configure Timer2 for desired frequency
-    T2CON = 0;           // Stop timer and reset control bits
-    PR2 = (FCY / (DESIRED_FREQ * 1)) - 1;  // PR2 = 1999 for 2kHz
-    TMR2 = 0;
-    T2CONbits.TCKPS = 0; // Prescaler 1:1
-    T2CONbits.TON = 1;   // Turn on Timer2
-
-    // Set up OC1 in PWM mode
-    OC1CON = 0;                // Reset control bits
-    OC1CONbits.OCTSEL = 0;     // Use Timer2
-    OC1CONbits.OCM = 0b110;    // Edge-aligned PWM
-    OC1R = PR2 / 2;             // Initial duty cycle = 50%
-    OC1RS = PR2 / 2;
-   
-    buzzerOFF();
-   
-}
-//
-//void set_tone(int)
-void buzzerOFF(void) {
-    OC1CONbits.OCM = 0b000;  
-}
-
-void buzzerON(void) {
-    OC1CONbits.OCM = 0b0110;  
-}
-
-void updateWompwomp(void) {
-    if (wompActive) {
-        if (wompTimer == 0) {
-            if (wompState == 0) {
-                buzzerON();
-                wompState = 1;
-            } else {
-                buzzerOFF();
-                wompState = 0;
-                wompBeepCount++;
-            }
-
-            if (wompBeepCount >= 10) {
-                wompActive = 0;
-                buzzerOFF();
-            } else {
-                wompTimer = 500; // ms
-            }
-        }
-    }
 }
 /**
  * @brief Timer1 interrupt, runs every 1 ms.
@@ -213,9 +154,7 @@ unsigned long getAvgTime(void){
  */
 int main(void) {
     while (1) {  
-        
         setup();
-        PWM_OC1_Init();
         initLCD();
 
         scrollText("Press to start", 250, 3000);
@@ -264,7 +203,7 @@ int main(void) {
                                 delay_ms(1);
                                 if (wompTimer > 0) wompTimer--;
                             }
-                            
+
                             delay_ms(1000);  // Optional extra pause
 //                            buzzerOFF();
                             goto restartGame;
@@ -304,12 +243,8 @@ int main(void) {
     unsigned long avg = getAvgTime();
     sprintf(buffer, "%lu.%03lu", avg / 1000, avg % 1000); // seconds.milliseconds
     lcd_printStr(buffer);
-    restartGame:;
-    wompActive = 0;
-    wompTimer = 0;
-    wompState = 0;
-    wompBeepCount = 0;
-    writeColor(0,0,0);;
+    restartGame:
+        ;
     }
 
     return 0;

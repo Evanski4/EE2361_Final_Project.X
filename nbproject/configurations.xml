@@ -8,6 +8,7 @@
       <itemPath>iLEDasm.h</itemPath>
       <itemPath>bluetooth.h</itemPath>
       <itemPath>LCD.h</itemPath>
+      <itemPath>Buzzer.h</itemPath>
     </logicalFolder>
     <logicalFolder name="ExternalFiles"
                    displayName="Important Files"
@@ -26,6 +27,7 @@
       <itemPath>iLEDwriteColor.c</itemPath>
       <itemPath>bluetooth.c</itemPath>
       <itemPath>LCD.c</itemPath>
+      <itemPath>Buzzer.c</itemPath>
     </logicalFolder>
   </logicalFolder>
   <sourceRootList>

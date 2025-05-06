@@ -9,10 +9,10 @@
 #define	BUZZER_H
 void PWM_OC1_Init(void) ;
 
-int wompActive = 0;
-int wompTimer = 0;
-int wompState = 0;  // 0 = off, 1 = on
-int wompBeepCount = 0;
+extern int wompActive;
+extern int wompTimer;
+extern int wompState;  // 0 = off, 1 = on
+extern int wompBeepCount;
 //
 //void set_tone(int)
 void buzzerOFF(void) ;

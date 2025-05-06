@@ -51,17 +51,17 @@ OBJECTDIR=build/${CND_CONF}/${IMAGE_TYPE}
 DISTDIR=dist/${CND_CONF}/${IMAGE_TYPE}
 
 # Source Files Quoted if spaced
-SOURCEFILES_QUOTED_IF_SPACED=Main.c iLEDasm.s iLEDwriteColor.c bluetooth.c LCD.c
+SOURCEFILES_QUOTED_IF_SPACED=Main.c iLEDasm.s iLEDwriteColor.c bluetooth.c LCD.c Buzzer.c
 
 # Object Files Quoted if spaced
-OBJECTFILES_QUOTED_IF_SPACED=${OBJECTDIR}/Main.o ${OBJECTDIR}/iLEDasm.o ${OBJECTDIR}/iLEDwriteColor.o ${OBJECTDIR}/bluetooth.o ${OBJECTDIR}/LCD.o
-POSSIBLE_DEPFILES=${OBJECTDIR}/Main.o.d ${OBJECTDIR}/iLEDasm.o.d ${OBJECTDIR}/iLEDwriteColor.o.d ${OBJECTDIR}/bluetooth.o.d ${OBJECTDIR}/LCD.o.d
+OBJECTFILES_QUOTED_IF_SPACED=${OBJECTDIR}/Main.o ${OBJECTDIR}/iLEDasm.o ${OBJECTDIR}/iLEDwriteColor.o ${OBJECTDIR}/bluetooth.o ${OBJECTDIR}/LCD.o ${OBJECTDIR}/Buzzer.o
+POSSIBLE_DEPFILES=${OBJECTDIR}/Main.o.d ${OBJECTDIR}/iLEDasm.o.d ${OBJECTDIR}/iLEDwriteColor.o.d ${OBJECTDIR}/bluetooth.o.d ${OBJECTDIR}/LCD.o.d ${OBJECTDIR}/Buzzer.o.d
 
 # Object Files
-OBJECTFILES=${OBJECTDIR}/Main.o ${OBJECTDIR}/iLEDasm.o ${OBJECTDIR}/iLEDwriteColor.o ${OBJECTDIR}/bluetooth.o ${OBJECTDIR}/LCD.o
+OBJECTFILES=${OBJECTDIR}/Main.o ${OBJECTDIR}/iLEDasm.o ${OBJECTDIR}/iLEDwriteColor.o ${OBJECTDIR}/bluetooth.o ${OBJECTDIR}/LCD.o ${OBJECTDIR}/Buzzer.o
 
 # Source Files
-SOURCEFILES=Main.c iLEDasm.s iLEDwriteColor.c bluetooth.c LCD.c
+SOURCEFILES=Main.c iLEDasm.s iLEDwriteColor.c bluetooth.c LCD.c Buzzer.c
 
 
 
@@ -113,6 +113,12 @@ ${OBJECTDIR}/LCD.o: LCD.c  .generated_files/flags/default/7a4dec52c672f6eb2e40c0
 	@${RM} ${OBJECTDIR}/LCD.o 
 	${MP_CC} $(MP_EXTRA_CC_PRE)  LCD.c  -o ${OBJECTDIR}/LCD.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -MP -MMD -MF "${OBJECTDIR}/LCD.o.d"      -g -D__DEBUG     -omf=elf -DXPRJ_default=$(CND_CONF)    $(COMPARISON_BUILD)  -O0 -msmart-io=1 -Wall -msfr-warn=off    -mdfp="${DFP_DIR}/xc16"
 	
+${OBJECTDIR}/Buzzer.o: Buzzer.c  .generated_files/flags/default/10df0c9049ffe210ca7ae70dd3fe5681947ae8e2 .generated_files/flags/default/da39a3ee5e6b4b0d3255bfef95601890afd80709
+	@${MKDIR} "${OBJECTDIR}" 
+	@${RM} ${OBJECTDIR}/Buzzer.o.d 
+	@${RM} ${OBJECTDIR}/Buzzer.o 
+	${MP_CC} $(MP_EXTRA_CC_PRE)  Buzzer.c  -o ${OBJECTDIR}/Buzzer.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -MP -MMD -MF "${OBJECTDIR}/Buzzer.o.d"      -g -D__DEBUG     -omf=elf -DXPRJ_default=$(CND_CONF)    $(COMPARISON_BUILD)  -O0 -msmart-io=1 -Wall -msfr-warn=off    -mdfp="${DFP_DIR}/xc16"
+	
 else
 ${OBJECTDIR}/Main.o: Main.c  .generated_files/flags/default/b30f990e32c3b599cbf098f3158629d5b50aa86c .generated_files/flags/default/da39a3ee5e6b4b0d3255bfef95601890afd80709
 	@${MKDIR} "${OBJECTDIR}" 
@@ -137,6 +143,12 @@ ${OBJECTDIR}/LCD.o: LCD.c  .generated_files/flags/default/addeea03508b2689011a21
 	@${RM} ${OBJECTDIR}/LCD.o.d 
 	@${RM} ${OBJECTDIR}/LCD.o 
 	${MP_CC} $(MP_EXTRA_CC_PRE)  LCD.c  -o ${OBJECTDIR}/LCD.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -MP -MMD -MF "${OBJECTDIR}/LCD.o.d"        -g -omf=elf -DXPRJ_default=$(CND_CONF)    $(COMPARISON_BUILD)  -O0 -msmart-io=1 -Wall -msfr-warn=off    -mdfp="${DFP_DIR}/xc16"
+	
+${OBJECTDIR}/Buzzer.o: Buzzer.c  .generated_files/flags/default/c8357e821fadeae95cde943c7382efc84eb4cbbd .generated_files/flags/default/da39a3ee5e6b4b0d3255bfef95601890afd80709
+	@${MKDIR} "${OBJECTDIR}" 
+	@${RM} ${OBJECTDIR}/Buzzer.o.d 
+	@${RM} ${OBJECTDIR}/Buzzer.o 
+	${MP_CC} $(MP_EXTRA_CC_PRE)  Buzzer.c  -o ${OBJECTDIR}/Buzzer.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -MP -MMD -MF "${OBJECTDIR}/Buzzer.o.d"        -g -omf=elf -DXPRJ_default=$(CND_CONF)    $(COMPARISON_BUILD)  -O0 -msmart-io=1 -Wall -msfr-warn=off    -mdfp="${DFP_DIR}/xc16"
 	
 endif
 
